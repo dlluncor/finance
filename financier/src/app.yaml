@@ -1,0 +1,14 @@
+application: financier
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /img
+  static_dir: img
+
+- url: /test_data
+  static_dir: test_data
+
+- url: /.*
+  script: index.py
