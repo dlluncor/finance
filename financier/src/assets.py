@@ -62,7 +62,13 @@ class CsvReader(object):
     stdev = float(row[2])
     return Asset(name=name, mean=mean, stdev=stdev)
 
-def main():
+def main(years):
+  """Runs the main simulation of financial fluctuation.
+  
+    Args:
+      years: number of years to run the simulation for.
+
+  """
   results = []
   filename = 'finances.csv'
   reader = CsvReader(filename)
@@ -70,7 +76,7 @@ def main():
 
   finalToAsset = {}
   for asset in assets:
-    asset.years = 10000 # Set the number of years for all simulations.
+    asset.years = years # Set the number of years for all simulations.
     final_investment = asset.run_finance_simulation()
     finalToAsset[final_investment] = asset
 
@@ -80,8 +86,8 @@ def main():
   for final_investment in dKeys:
     asset = finalToAsset[final_investment]
     as_gain_or_loss = final_investment - 1
-    results += ['%s\t\t%.2f' % (str(asset), as_gain_or_loss)]
+    results.append('%s %.2f' % (str(asset), as_gain_or_loss))
   return results
 
 if __name__ == "__main__":
-  main()
+  main(100000)

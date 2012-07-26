@@ -10,5 +10,8 @@ handlers:
 - url: /test_data
   static_dir: test_data
 
+- url: /js
+  static_dir: js
+
 - url: /.*
   script: index.py
