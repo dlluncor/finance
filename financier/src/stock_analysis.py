@@ -228,7 +228,7 @@ class Questions(object):
         if do_plot:
           closing_vals = yahoo_table.getAllClosing()
           Plotter.plot(StockAnalysis.getPercentChanges(closing_vals)) 
-      except Exception as inst:
+      except Exception:
         pass
     # Only do this for more or one tables.
     if len(yahoo_tables) <= 1:
