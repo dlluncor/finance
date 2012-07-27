@@ -141,8 +141,12 @@ class StockAnalysis(object):
        1  * val[0] * val[1]
        TODO: check why is this not total return???
      """
-    count = 1
+    # I put in 1/12 of my month if there are 12 total changes.
+    # Then at each month I add 1/12 to the pie and see what happens.
+    count = 0
+    fraction_add = 1/ float(len(values))
     for val in values:
+      count += fraction_add
       count *= (1 + val)
     return count
 
@@ -228,7 +232,8 @@ class Questions(object):
       return
     # Compound your month to month returns.
     all_return = StockAnalysis.getCompoundedReturn(total_returns)
-    print 'Return for year: %.2f' % (all_return * 100)
+    gain = all_return - 1
+    print 'Gain for year with month style: %.2f' % (gain * 100)
     #(line, t_return) = Questions.create_report_line(total_returns, 'Month-to-month')
     #print line
 
