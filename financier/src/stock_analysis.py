@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta #DateUtils
 import math
-import pylab #Plotter
+#import pylab #Plotter
 import sys
 import ystockquote #YahooStockTable
 
@@ -199,10 +199,11 @@ class Questions(object):
     total_return = StockAnalysis.getTotalReturn(values)
     stdev_return = StockAnalysis.getStdevReturn(values)
     closing_val_range = '%.2f to %.2f' % (values[0], values[-1])
-    line = '%s,\t%.2f,\t%.2f,\t%.2f,\t%s' % (first_col_title, avg_return * 100, 
+    line = '%s\t%.2f\t%.2f\t%.2f\t%s' % (first_col_title, avg_return * 100, 
                                              total_return * 100, stdev_return * 100,
                                              closing_val_range)
-    return (line, total_return)
+    cols = {"cols": line.split("\t")}
+    return (cols, total_return)
 
   @staticmethod
   def print_report(yahoo_tables, do_plot=False):
@@ -210,8 +211,10 @@ class Questions(object):
 
     average return, standard deviation, total return
     """
-    headers = ['date_range', 'average_return', 'total_return', 'stdev', 'closing_range']
-    print '\t'.join(headers)
+    results = []
+    headers = ['Date Range', 'Average Return (%)', 'Total Return (%)', 'Standard deviation', 
+               'Closing stock range']
+    results.append({"cols": headers})
 
     total_returns = []
     for yahoo_table in yahoo_tables:
@@ -220,7 +223,7 @@ class Questions(object):
         dates = yahoo_table.getAllDates()
         first_col_title = '%s to %s' % (dates[0], dates[-1])
         (line, total_return) = Questions.create_report_line(closing_vals, first_col_title)
-        print line
+        results.append(line)
         total_returns.append(total_return)
         if do_plot:
           closing_vals = yahoo_table.getAllClosing()
@@ -229,13 +232,14 @@ class Questions(object):
         pass
     # Only do this for more or one tables.
     if len(yahoo_tables) <= 1:
-      return
+      return results
     # Compound your month to month returns.
     all_return = StockAnalysis.getCompoundedReturn(total_returns)
     gain = all_return - 1
-    print 'Gain for year with month style: %.2f' % (gain * 100)
-    #(line, t_return) = Questions.create_report_line(total_returns, 'Month-to-month')
-    #print line
+    gain_line = {"cols": ['Total return by putting in each month style: %.2f percent.' % (
+      gain * 100)]}
+    results.append(gain_line)
+    return results
 
 
 class DateUtils(object):
@@ -261,11 +265,12 @@ class DateUtils(object):
     return end_date_formatted
 
 def main(ticker_symbol, year):
+  """Returns an array of results (where each result is a line of text)."""
   tbls = Questions.makeMonthlyTables(ticker_symbol, year)
-  Questions.print_report(tbls, False)
-  print '-' * 30
+  results1 = Questions.print_report(tbls, False)
   yearly_tbl = Questions.makeYearlyTable(ticker_symbol, year)
-  Questions.print_report([yearly_tbl], False)
+  results2 = Questions.print_report([yearly_tbl], False)
+  return results1 + results2
 
 class Tests():
   @staticmethod
