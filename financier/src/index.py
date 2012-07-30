@@ -3,6 +3,7 @@ The main point of entry for the webapp.
 @since: July 24, 2012
 @author: dlluncor
 """
+import logging
 import os
 
 from django.utils import simplejson
@@ -10,8 +11,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-import assets
-import stock_analysis
+from simulator import assets
+from analysis import question1
 from ticker_symbols import ticker_mapper
 
 class MainPage(webapp.RequestHandler):
@@ -33,7 +34,9 @@ class StockHistoryEndPoint(webapp.RequestHandler):
   def get(self):
     year = int(self.request.get("whichYear"))
     ticker = self.request.get("ticker")
-    results = stock_analysis.main(ticker, year)
+    logging.info('hi mom')
+    results = question1.Question1.main(ticker, year)
+    logging.info(results)
     myresponse = {'results': results}
     json = simplejson.dumps(myresponse)
     self.response.headers.add_header('content-type', 'application/json', charset='utf-8')

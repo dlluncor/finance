@@ -19,6 +19,8 @@ hist.renderResults_ = function(response) {
 };
 
 hist.renderErrorResults_ = function(xhr, textStatus, errorThrown) {
+	console.log(xhr);
+	console.log(textStatus);
   window.console.log('Boo stock history results failed.');
 };
 

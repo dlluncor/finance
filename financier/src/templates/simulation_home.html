@@ -1,37 +1,17 @@
 <html>
   <head>
-    <style>
-      #SimulationTab {
-        background-color: whiteSmoke;
-        display: none;
-      }
-      #StockHistoryTab {
-        background-color: whiteSmoke;
-      }
-      .niceTable {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      .niceTable td {
-        border: 1px solid lightgrey;
-      }
-
-      .autocomplete-w1 { position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; }
-.autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; }
-.autocomplete .selected { background:#F0F0F0; }
-.autocomplete div { padding:2px 5px; white-space:nowrap; overflow:hidden; }
-.autocomplete strong { font-weight:normal; color:#3399FF; }
-
-       #ticker {
-         width: 412px;
-       }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+    <script src="js/home_controller.js" type="text/javascript"></script>
     <script src="js/simulation.js" type="text/javascript"></script>
     <script src="js/stockhistory.js" type="text/javascript"></script>
   </head>
   <body>
+    <ul class='tabs'>
+      <li><a href='#SimulationTab'>Simulation</a></li>
+      <li><a href='#StockHistoryTab'>Stock History</a></li>
+    </ul>
     <div id="SimulationTab">
 		  <div id="SimulationUserInput">
 		    <table>

@@ -70,7 +70,7 @@ def main(years):
 
   """
   results = []
-  filename = 'finances.csv'
+  filename = os.path.join(os.path.dirname(__file__), 'finances.csv')
   reader = CsvReader(filename)
   assets = reader.getAssets()
 
