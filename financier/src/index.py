@@ -12,6 +12,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 import assets
 import stock_analysis
+from ticker_symbols import ticker_mapper
 
 class MainPage(webapp.RequestHandler):
   def get(self):
@@ -38,11 +39,23 @@ class StockHistoryEndPoint(webapp.RequestHandler):
     self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
     self.response.out.write(json)
 
+class TickerSymbolSuggestionsEndPoint(webapp.RequestHandler):
+  """Used for autocomplete when wanting to go from easy to input company
+     name (Google) to ticker symbol (GOOG).
+  """
+  def get(self):
+    query = self.request.get("query")
+    ret = ticker_mapper.get_suggestions(query)
+    json = simplejson.dumps(ret)
+    self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
+    self.response.out.write(json)
+
 def main():
   application = webapp.WSGIApplication([
     ('/', MainPage),
     ('/simulation_results', ResultEndPoint),
-    ('/stock_history_results', StockHistoryEndPoint), 
+    ('/stock_history_results', StockHistoryEndPoint),
+    ('/ticker_symbol_suggestions', TickerSymbolSuggestionsEndPoint),
   ], debug=True)
   run_wsgi_app(application)
 

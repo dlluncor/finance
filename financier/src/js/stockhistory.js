@@ -53,6 +53,22 @@ hist.addYearOptions_ = function() {
 hist.init_ = function() {
   hist.addYearOptions_();
   $('#runStockHistory').click(hist.fetchResults_);
+  hist.addTickerAutocomplete();
+};
+
+hist.addTickerAutocomplete = function() {
+  var onSuggestionSelected = function(value, data) {
+    $('#ticker').val(data);
+  };
+
+  var options, a;
+  jQuery(function(){
+    options = { 
+      serviceUrl:'/ticker_symbol_suggestions',
+      onSelect: onSuggestionSelected
+    };
+    a = $('#ticker').autocomplete(options);
+  });
 };
 
 $(document).ready(hist.init_);
