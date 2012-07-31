@@ -1,3 +1,4 @@
+import logging
 import ystockquote
 
 class YahooStockTable(object):

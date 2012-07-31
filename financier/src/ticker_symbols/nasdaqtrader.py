@@ -55,6 +55,20 @@ class TickerSymbols(object):
     symbols = TickerSymbols(name)
     return symbols.getNameToTicker()
 
+  @staticmethod
+  def getMututalFundMap():
+    """Gets a map of names to ticker symbols for mutual funds."""
+    name = os.path.join(os.path.dirname(__file__), 'mutualfunds_nasdaqtrader.csv')
+    symbols = TickerSymbols(name)
+    return symbols.getNameToTicker()   
+
+  @staticmethod
+  def getNasdaqMap():
+    """Gets a map of names to ticker symbols for NASDAQ."""
+    name = os.path.join(os.path.dirname(__file__), 'nasdaq_nasdaqtrader.csv')
+    symbols = TickerSymbols(name)
+    return symbols.getNameToTicker()
+
 if __name__ == '__main__':
   name = os.path.join(os.path.dirname(__file__), 'nasdaq_nasdaqtrader.csv')
   symbols = TickerSymbols(name)
