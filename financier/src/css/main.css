@@ -4,6 +4,9 @@
 #StockHistoryTab {
   background-color: whiteSmoke;
 }
+#StockComparisonTab {
+  background-color: whiteSmoke;
+}
 
 .niceTable {
   border: 1px solid black;
@@ -40,5 +43,9 @@
 .autocomplete strong { font-weight:normal; color:#3399FF; }
 
 #ticker {
+  width: 412px;
+}
+
+#tickerCmp {
   width: 412px;
 }

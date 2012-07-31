@@ -6,13 +6,15 @@ The main point of entry for the webapp.
 import logging
 import os
 
-from django.utils import simplejson
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from django.utils import simplejson
+
 from simulator import assets
 from analysis import question1
+from analysis import question3
 from ticker_symbols import ticker_mapper
 
 class MainPage(webapp.RequestHandler):
@@ -42,6 +44,21 @@ class StockHistoryEndPoint(webapp.RequestHandler):
     self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
     self.response.out.write(json)
 
+class StockComparisonEndPoint(webapp.RequestHandler):
+  def get(self):
+    year = int(self.request.get("whichYear"))
+    tickers_str = self.request.get("ticker")
+    tickers = tickers_str.split(',')
+    the_tickers = []
+    for ticker in tickers:
+      the_tickers.append(ticker.strip())
+    results = question3.Question3.main(the_tickers, year)
+    logging.info(results)
+    myresponse = {'results': results}
+    json = simplejson.dumps(myresponse)
+    self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
+    self.response.out.write(json)
+
 class TickerSymbolSuggestionsEndPoint(webapp.RequestHandler):
   """Used for autocomplete when wanting to go from easy to input company
      name (Google) to ticker symbol (GOOG).
@@ -58,6 +75,7 @@ def main():
     ('/', MainPage),
     ('/simulation_results', ResultEndPoint),
     ('/stock_history_results', StockHistoryEndPoint),
+    ('/stock_comparison_results', StockComparisonEndPoint),
     ('/ticker_symbol_suggestions', TickerSymbolSuggestionsEndPoint),
   ], debug=True)
   run_wsgi_app(application)

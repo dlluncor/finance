@@ -11,6 +11,7 @@
     <ul class='tabs'>
       <li><a href='#SimulationTab'>Simulation</a></li>
       <li><a href='#StockHistoryTab'>Stock History</a></li>
+      <li><a href='#StockComparisonTab'>Stock Comparisons</a></li>
     </ul>
     <div id="SimulationTab">
 		  <div id="SimulationUserInput">
@@ -39,6 +40,21 @@
         </table>
       </div>
       <div id="StockHistoryResults" />
+    </div>
+    </div>
+
+    <div id="StockComparisonTab">
+      <div id="StockComparisonInput">
+        <div>-1 = inverse correlation. 0 = no correlation. 1 = positive correlation.</div>
+        <table>
+          <tr>
+            <td><input id="tickerCmp" value="JAVTX,OAKIX,HIINX,BIAGX,NOSGX,DGAGX,PQIAX" placeholder="Enter tickers (GOOG, MSFT)"></input></td>
+            <td><select id="whichYearCmp"></select></td>
+            <td><input id="runStockComparison" type="submit" value="Search"></input></td>
+          </tr>
+        </table>
+      </div>
+      <div id="StockComparisonResults" />
     </div>
   </body>
 </html>

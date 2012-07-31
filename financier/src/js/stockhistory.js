@@ -52,10 +52,78 @@ hist.addYearOptions_ = function() {
   $('#whichYear').html(options);
 };
 
+// For comparisons.
+var cmpS = {};
+
+cmpS.renderResults_ = function(response) {
+  window.console.log(response);
+  var resultArea = $('#StockComparisonResults');
+  // Clear previous results.
+  $('#StockComparisonResults').html('');
+  var table = $('<table class="niceTable"></table>');
+  for (var ind in response.results) {
+    var result = response.results[ind];
+    var row = $('<tr></tr>');
+    for (var colInd in result.cols) {
+      var colText;
+      // Render symbol as a link to Google finance.
+      if (colInd == 0 || colInd == 2) {
+        var ticker = result.cols[colInd];
+        var fullLink = 'http://www.google.com/finance?q=' + ticker;
+        colText = '<a target="_blank" href="'+ fullLink + '">' + ticker + '</a>';
+      } else {
+        colText = result.cols[colInd];
+      }
+      row.append('<td>'+ colText +'</td>');
+    }
+    table.append(row);
+  }
+  resultArea.append(table);
+};
+
+cmpS.renderErrorResults_ = function(xhr, textStatus, errorThrown) {
+	console.log(xhr);
+	console.log(textStatus);
+  window.console.log('Boo stock comparison results failed.');
+};
+
+cmpS.buildRequestUrl_ = function() {
+  var requestUrl = '/stock_comparison_results?';
+  var params = {};
+  params['whichYear'] = $('#whichYearCmp').val();
+  params['ticker'] = $('#tickerCmp').val();
+  for (var key in params) {
+    requestUrl += key + "=" + params[key] + "&";
+  }
+  return requestUrl;
+};
+
+cmpS.fetchResults_ = function(opt_e) {
+  $.ajax({
+      dataType: 'json',
+      url: cmpS.buildRequestUrl_(),
+      success: cmpS.renderResults_,
+      error: cmpS.renderErrorResults_
+    });
+};
+
+cmpS.addYearOptions_ = function() {
+  var options = '';
+  for (var year = 2012; year > 1999; year--) {
+    options += '<option value="'+ year + '">' + year + '</option>';
+  }
+  $('#whichYearCmp').html(options);
+};
+
+
 hist.init_ = function() {
   hist.addYearOptions_();
   $('#runStockHistory').click(hist.fetchResults_);
   hist.addTickerAutocomplete();
+
+  // For comparison tool.
+  $('#runStockComparison').click(cmpS.fetchResults_);
+  cmpS.addYearOptions_();
 };
 
 hist.addTickerAutocomplete = function() {
