@@ -1,6 +1,5 @@
 from util import DateUtils
 from util import StatUtils
-from yahoo_stock_table import YahooStockTable
 import sys
 
 class StockUtils(object):
