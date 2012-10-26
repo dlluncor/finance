@@ -62,6 +62,20 @@ cmpS.renderResults_ = function(response) {
   $('#StockComparisonResults').html('');
   var table = $('<table class="niceTable"></table>');
   var stockResultsTmpl = $('#myTemplate').template();
+
+  var results = [];
+  for (var i = 0; i < response.results.length; i++) {
+    var res = response.results[i];
+    var style = '';
+    if (res.correlation >= 0.9) {
+      style = 'color:red;'; 
+    } else if (res.correlation > 0.3 && res.correlation < 0.9) {
+      style = 'color:darkorange;';
+    } else {
+      style = 'color:green;';
+    }
+    res.correlation = '<span style="' + style + '">' + res.correlation + '</span>';
+  }
   $.tmpl(stockResultsTmpl, response.results).appendTo(table);
   resultArea.append(table);
 };
