@@ -55,34 +55,13 @@ hist.addYearOptions_ = function() {
 // For comparisons.
 var cmpS = {};
 
-// Returns HTML for the link to the google finance for that ticker symbol.
-cmpS.fullTickerLink_ = function(tickerName) {
-  var fullLink = 'http://www.google.com/finance?q=' + tickerName;
-  colText = '<a target="_blank" href="'+ fullLink + '">' + tickerName + '</a>';
-  return colText;
-};
-
 cmpS.renderResults_ = function(response) {
   window.console.log(response);
   var resultArea = $('#StockComparisonResults');
   // Clear previous results.
   $('#StockComparisonResults').html('');
   var table = $('<table class="niceTable"></table>');
-  for (var ind in response.results) {
-    var result = response.results[ind];
-    var row = $('<tr></tr>');
-
-    var colTexts = [
-      cmpS.fullTickerLink_(result.stock1),
-      'compared to',
-      cmpS.fullTickerLink_(result.stock2),
-      result.correlation
-    ];
-    for (var j = 0; j < colTexts.length; j++) {
-      row.append('<td>'+ colTexts[j] +'</td>');
-    }
-    table.append(row);
-  }
+  $('#myTemplate').tmpl(response.results).appendTo(table);
   resultArea.append(table);
 };
 

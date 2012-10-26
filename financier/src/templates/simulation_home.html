@@ -7,6 +7,14 @@
     <script src="js/home_controller.js" type="text/javascript"></script>
     <script src="js/simulation.js" type="text/javascript"></script>
     <script src="js/stockhistory.js" type="text/javascript"></script>
+    <script id="myTemplate" type="text/x-jquery-tmpl">
+      <tr>
+        <td><a target="_blank" href="http://www.google.com/finance?q=${stock1}">${stock1}</a></td>
+        <td>compared to</td>
+        <td><a target="_blank" href="http://www.google.com/finance?q=${stock2}">${stock2}</a></td>
+        <td>${correlation}</td>
+      </tr>
+    </script>
   </head>
   <body>
     <ul class='tabs'>
