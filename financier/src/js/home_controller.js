@@ -34,6 +34,26 @@ controller.init_ = function() {
 		      e.preventDefault();
 		  });
 	});
+
+  controller.insertTemplates();
+};
+
+controller.insertTemplates = function() {
+  function loadTemplate(tObj) {
+    $.get(tObj.path, function(templateText){
+      var text = '<script id="' + tObj.id + '" type="text/x-jquery-tmpl">' + 
+               templateText + '</script>';
+      $('body').append(text);
+    });
+  }
+
+  var templates = [
+    {path: 'js/stockhistory/table.html', id: 'myTemplate'}
+  ];
+
+  for (var i = 0; i < templates.length; i++) {
+    loadTemplate(templates[i]);
+  }
 };
 
 $(document).ready(controller.init_);

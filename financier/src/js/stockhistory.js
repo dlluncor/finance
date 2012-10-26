@@ -61,7 +61,8 @@ cmpS.renderResults_ = function(response) {
   // Clear previous results.
   $('#StockComparisonResults').html('');
   var table = $('<table class="niceTable"></table>');
-  $('#myTemplate').tmpl(response.results).appendTo(table);
+  var stockResultsTmpl = $('#myTemplate').template();
+  $.tmpl(stockResultsTmpl, response.results).appendTo(table);
   resultArea.append(table);
 };
 
