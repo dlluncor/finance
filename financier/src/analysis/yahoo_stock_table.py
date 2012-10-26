@@ -2,7 +2,8 @@ import logging
 import ystockquote
 
 class YahooStockTable(object):
-  DATA_START_ROW = 1 # Header is the first row.
+  HEADER_ROW = 0 # Header is the 0th row.
+  DATA_START_ROW = 1 # Data starts on the 1st row.
   DATE_COL = 0
   CLOSE_COL = 4
   def __init__(self, table):
@@ -10,6 +11,7 @@ class YahooStockTable(object):
       Args:
         table: 2D table that Yahoo historical prices returns. 
     """
+    self.header = self.makeHeader(table)
     self.table = self.fixTable(table)
   
   def fixTable(self, table):
@@ -22,12 +24,21 @@ class YahooStockTable(object):
     reversed_table = [row for row in reversed(data_table)]
     return reversed_table
 
+  def makeHeader(self, table):
+    """Returns the header row describing what each column is."""
+    return table[self.HEADER_ROW]
+  ## Public methods
+
   def getNumDataRows(self):
     return len(self.table)
 
   def getClose(self, rowIndex):
-    """Returns closing value as integer."""
+    """Returns closing value as float."""
     return float(self.table[rowIndex][self.CLOSE_COL])
+
+  def getEarningsPerShare(self, rowIndex):
+    """Returns earnings per share as a float."""
+    return float(self.table[rowIndex][self.EPS_COL])
 
   def getDate(self, rowIndex):
     """Returns closing value as integer."""

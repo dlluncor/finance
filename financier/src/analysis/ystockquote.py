@@ -25,18 +25,20 @@ sample usage:
 """
 
 
-def __request(symbol, stat):
+def __request(symbol, stat, date_params = ''):
     url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, stat)
+    if date_params:
+      url += '&' + date_params
     return urllib.urlopen(url).read().strip().strip('"')
 
 
-def get_all(symbol):
+def get_all(symbol, date_params = ''):
     """
     Get all available quote data for the given ticker symbol.
     
     Returns a dictionary.
     """
-    values = __request(symbol, 'l1c1va2xj1b4j4dyekjm3m4rr5p5p6s7').split(',')
+    values = __request(symbol, 'l1c1va2xj1b4j4dyekjm3m4rr5p5p6s7', date_params).split(',')
     data = {}
     data['price'] = values[0]
     data['change'] = values[1]
@@ -140,7 +142,17 @@ def get_price_book_ratio(symbol):
 def get_short_ratio(symbol): 
     return __request(symbol, 's7')
     
-    
+ 
+def make_date_params(start_date, end_date):
+  params = 'd=%s&' % str(int(end_date[4:6]) - 1) + \
+           'e=%s&' % str(int(end_date[6:8])) + \
+           'f=%s&' % str(int(end_date[0:4])) + \
+           'g=d&' + \
+           'a=%s&' % str(int(start_date[4:6]) - 1) + \
+           'b=%s&' % str(int(start_date[6:8])) + \
+           'c=%s&' % str(int(start_date[0:4]))
+  return params
+   
 def get_historical_prices(symbol, start_date, end_date):
     """
     Get historical prices for the given ticker symbol.
@@ -161,3 +173,12 @@ def get_historical_prices(symbol, start_date, end_date):
     #print symbol.join(days)
     data = [day[:-2].split(',') for day in days]
     return data
+
+def get_all_historical(symbol, start_date, end_date):
+  """
+   Gets all data for a stock given its history.
+  """
+  date_params = make_date_params(start_date, end_date)
+  data = get_all(symbol, date_params)
+  print data
+  

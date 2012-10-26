@@ -55,6 +55,13 @@ hist.addYearOptions_ = function() {
 // For comparisons.
 var cmpS = {};
 
+// Returns HTML for the link to the google finance for that ticker symbol.
+cmpS.fullTickerLink_ = function(tickerName) {
+  var fullLink = 'http://www.google.com/finance?q=' + tickerName;
+  colText = '<a target="_blank" href="'+ fullLink + '">' + tickerName + '</a>';
+  return colText;
+};
+
 cmpS.renderResults_ = function(response) {
   window.console.log(response);
   var resultArea = $('#StockComparisonResults');
@@ -64,17 +71,15 @@ cmpS.renderResults_ = function(response) {
   for (var ind in response.results) {
     var result = response.results[ind];
     var row = $('<tr></tr>');
-    for (var colInd in result.cols) {
-      var colText;
-      // Render symbol as a link to Google finance.
-      if (colInd == 0 || colInd == 2) {
-        var ticker = result.cols[colInd];
-        var fullLink = 'http://www.google.com/finance?q=' + ticker;
-        colText = '<a target="_blank" href="'+ fullLink + '">' + ticker + '</a>';
-      } else {
-        colText = result.cols[colInd];
-      }
-      row.append('<td>'+ colText +'</td>');
+
+    var colTexts = [
+      cmpS.fullTickerLink_(result.stock1),
+      'compared to',
+      cmpS.fullTickerLink_(result.stock2),
+      result.correlation
+    ];
+    for (var j = 0; j < colTexts.length; j++) {
+      row.append('<td>'+ colTexts[j] +'</td>');
     }
     table.append(row);
   }

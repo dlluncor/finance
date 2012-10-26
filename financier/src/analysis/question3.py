@@ -48,17 +48,15 @@ class Question3(object):
       ind = pair[0]
       ind2 = pair[1]
       cor = correlations[ind][ind2]
-      col0 = stocks[ind]
-      col1 = 'compared to'
-      col2 = stocks[ind2]
-      col3 = '%.2f' % cor
       result = {}
-      cols = [col0, col1, col2, col3]
-      result['cols'] = cols
+      result['stock1'] = stocks[ind]
+      result['stock2'] = stocks[ind2]
+      result['correlation'] = '%.2f' % cor
       results.append(result)
     # Sort the results
     def sorter(left, right):
-      return int(float(left['cols'][3]) * 100.0 - float(right['cols'][3]) * 100.0)
+      return int(float(left['correlation']) * 100.0 - 
+             float(right['correlation']) * 100.0)
     results.sort(sorter)
     return results
 
