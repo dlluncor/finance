@@ -12,8 +12,9 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 from django.utils import simplejson
 
-# Health specific modules.
+# Import modules I don't want to create another application for.
 from proj.health import index as health_index
+from proj.education import index as education_index
 
 from simulator import assets
 from analysis import question1
@@ -83,7 +84,8 @@ def main():
     ('/ticker_symbol_suggestions', TickerSymbolSuggestionsEndPoint),
   ]
   health_endpoints = health_index.GetEndpoints()
-  endpoints = finance_endpoints + health_endpoints
+  education_endpoints = education_index.GetEndpoints()
+  endpoints = finance_endpoints + health_endpoints + education_endpoints
   application = webapp.WSGIApplication(endpoints, debug=True)
   run_wsgi_app(application)
 
