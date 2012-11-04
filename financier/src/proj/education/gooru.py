@@ -37,7 +37,7 @@ class Gooru(object):
     return self._contact.Post(req)
 
   #### List of the different APIs. ####
-  def _SearchResource(self, query, pageNum=1, pageSize=1):
+  def _SearchResource(self, query, pageNum=1, pageSize=20):
     pre = os.path.join(self._BASE_URI,
       'gooru-search/rest/search/resource?')
     arg0 = '%s=%s' % ('sessionToken', self._token)
@@ -46,7 +46,6 @@ class Gooru(object):
     arg3 = '%s=%d' % ('pageNum', pageNum)
     args = '&'.join([arg0, arg1, arg2, arg3])
     req = pre + args
-    print req
     """
       url returns actual resource
       description
@@ -70,6 +69,19 @@ class Contacter(object):
     f = urllib2.urlopen(req)
     return str(f.read()) 
 
+
+def GetResults(query):
+  """Gets results for the user about this query.
+
+  Args:
+    query: the text query, e.g., "philosophy"
+  """
+  gooru = Gooru()
+  gooru.Init()
+  resp_text = gooru._SearchResource(query)
+  print resp_text
+  response = simplejson.loads(resp_text)
+  return response['searchResults']
 
 def main(argv):
   gooru = Gooru()

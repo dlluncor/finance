@@ -2,18 +2,20 @@ var gooru = {};
 gooru.resultElId = 'searchGooruResults';
 
 gooru.renderResults_ = function(response) {
-  $('#' + gooru.resultElId).html();
-  var el = $('#' + gooru.resultElId); 
-  for (var i = 0; i < response.results.length; i++) {
-    var res = response.results[i];
-    var div = $('<div></div>');
-    div.html(res);
-    el.append(div);
+  $('#' + gooru.resultElId).html('');
+  var el = $('#' + gooru.resultElId);
+  if (response.results.length == 0) {
+    el.html('No results sorry!');
+    return;
   }
+  var table = $('<table></table>');
+  el.append(table);
+  var searchResultTmpl = $('#searchResultTmpl');
+  $.tmpl(searchResultTmpl, response.results).appendTo(table); 
 };
 
 gooru.renderErrorResults_ = function(xhr, textStatus, errorThrown) {
-  $('#' + gooru.resultElId).html();
+  $('#' + gooru.resultElId).html('');
   $('#' + gooru.resultElId).html('Boo gooru results failed.');
 };
 
