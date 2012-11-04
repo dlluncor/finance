@@ -13,7 +13,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from django.utils import simplejson
 
 # Health specific modules.
-from proj.health import medlineplus
+from proj.health import index as health_index
 
 from simulator import assets
 from analysis import question1
@@ -73,25 +73,18 @@ class TickerSymbolSuggestionsEndPoint(webapp.RequestHandler):
     self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
     self.response.out.write(json)
 
-
-##### Health endpoints
-class HealthMainPage(webapp.RequestHandler):
-  def get(self):
-    values = {}
-    values['entries'] = simplejson.dumps(medlineplus.Ask())
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'health_home.html')
-    self.response.out.write(template.render(path, values))
-
 def main():
-  application = webapp.WSGIApplication([
+  # Tuple of paths to web handler classes.
+  finance_endpoints = [
     ('/', MainPage),
     ('/simulation_results', ResultEndPoint),
     ('/stock_history_results', StockHistoryEndPoint),
     ('/stock_comparison_results', StockComparisonEndPoint),
     ('/ticker_symbol_suggestions', TickerSymbolSuggestionsEndPoint),
-    # Health end points.
-    ('/health', HealthMainPage),
-  ], debug=True)
+  ]
+  health_endpoints = health_index.GetEndpoints()
+  endpoints = finance_endpoints + health_endpoints
+  application = webapp.WSGIApplication(endpoints, debug=True)
   run_wsgi_app(application)
 
 if __name__ == '__main__':
