@@ -13,7 +13,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from django.utils import simplejson
 
 # Health specific modules.
-from health import medlineplus
+from proj.health import medlineplus
 
 from simulator import assets
 from analysis import question1
