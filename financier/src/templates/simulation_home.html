@@ -14,7 +14,22 @@
         <li><a href="/education">Education</a></li>
         <li class="current"><a href="/">Finance</a></li>
         <li><a href="/health">Health</a></li>
+        <li><a href="#" id="moreLink">More</a>
       </ol>
+      <ol class="hackypopout" id="moreFlyout" style="display:none;">
+        <li style="padding-left:0px;">
+          <a href="speed_reading">Reading</a>
+        </li>
+      </ol>
+      <script>
+        var moreLink = $('#moreLink');
+        moreLink.click(function(e) {
+          var flyout = $('#moreFlyout');
+          var display = flyout.css('display');
+          var newDisplay = display == 'none' ? 'block' : 'none';
+          flyout.css('display', newDisplay);  
+        });
+      </script>
     </div>
     <ul class='tabs'>
       <li><a href='#SimulationTab'>Simulation</a></li>

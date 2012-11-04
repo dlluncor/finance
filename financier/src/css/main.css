@@ -23,6 +23,15 @@
   font-weight: bold;
 }
 
+.sandbar .hackypopout {
+  padding-left: 0px;
+  padding-top: 4px;
+  position: absolute;
+  background-color: black;
+  top: 12;
+  left: 260;
+}
+
 #SimulationTab {
   background-color: whiteSmoke;
 }
