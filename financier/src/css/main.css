@@ -1,3 +1,28 @@
+/* Sandbar */
+.sandbar {
+  background-color: black;
+}
+
+.sandbar ol {
+  -webkit-padding-start: 0px;
+}
+
+.sandbar li {
+  padding-left: 20px;
+  display: inline;
+  font-family: arial,sans-serif;
+  font-size: 14px;
+}
+
+.sandbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.sandbar .current {
+  font-weight: bold;
+}
+
 #SimulationTab {
   background-color: whiteSmoke;
 }
