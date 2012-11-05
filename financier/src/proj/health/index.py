@@ -10,7 +10,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
 import os
-import simplejson
+from django.utils import simplejson
 
 class HealthMainPage(webapp.RequestHandler):
   def get(self):

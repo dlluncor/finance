@@ -8,7 +8,7 @@ helps contact their API.
 import os
 import urllib2
 import sys
-import simplejson
+from django.utils import simplejson
 
 class Gooru(object):
   """Utility to contact the gooru API."""
