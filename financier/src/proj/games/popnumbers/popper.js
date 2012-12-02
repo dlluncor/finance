@@ -187,12 +187,15 @@ Circle.prototype.setClickHandler = function(handler) {
 
 Circle.prototype.hide = function() {
   var tmp = this;
+  /**
   tmp.el_.css('box-shadow', '0px 0px 40px 40px rgba(255,255,0,0.3)');
   tmp.el_.animate({
     'opacity': 0
   }, 200, function(){ 
     tmp.el_.css('visibility', 'hidden');
   });
+  */
+  tmp.el_.css('visibility', 'hidden');
 }; 
 
 // Shuffles numbers from 0 to n.
