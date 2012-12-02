@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+  <title>My Page</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+  <style>
+    #thepage{ max-width:250px; }
+    #footer { position:absolute; bottom: 0;}
+  </style>
+</head> 
+<body> 
+<div data-role="page" id="thepage">
+  <ul id="gamelist" data-role="listview" data-theme="c"></ul>
+  <div id="footer"> 
+    <a href="#" data-role="button" data-icon="refresh" data-inline="true"
+        id="refreshButton">Refresh</a>
+    <a href="proj/games/popnumbers/addmodal.html" data-role="button" 
+        data-icon="plus" data-inline="true"
+        data-rel="dialog"
+        id="addButton">Add
+    </a>
+  </div>
+</div>
+<script>
+  // Jibe JS API.
+var jibe = {};
+jibe.receiveMessage = function(str) {
+  var map = JSON.parse(str);
+  Android.redirect(map.choose);
+};
+
+jibe.sendMessage = function(str) {
+  Android.sendMessage(str);
+};
+
+//var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
+</script>
+<script>
+var ctrl = {};
+ctrl.listId = 'gamelist';
+ctrl.addButtonId = 'addButton';
+ctrl.refreshButtonId = 'refreshButton';
+ctrl.pendingGames = []; // A list of tuples (url, displyable name.)
+
+ctrl.init = function() {
+  var games = [
+    ["/to25", "Number Race"],
+    //["/bubblepop", "Bubble Pop"]
+  ];
+  // Add all the hardcoded games.
+  for (var i = 0; i < games.length; i++) {
+    var game = games[i];
+    ctrl.addGame(games[i]);
+  }
+
+  // Button click handlers.
+  $('#' + ctrl.addButtonId).click(function() {
+    // Open modal to have user select stuff.
+    
+
+    // "Add" from the database the item you created.
+    // var game = ['/bubblepop', 'Bubble Pop'];
+    // ctrl.pendingGames.push(game);
+  });
+
+  $('#' + ctrl.refreshButtonId).click(function() {
+    // There is one game pending, should go in
+    // add button really.
+    var game = ['/bubblepop', 'Bubble Pop'];
+    ctrl.pendingGames.push(game);
+
+    // "Ask database".
+    setTimeout(function() {
+      // Iterate through pending game list and populate menu.
+      for (var i = 0; i < ctrl.pendingGames.length; i++) {
+        ctrl.addGame(ctrl.pendingGames[i]);
+      }
+      ctrl.pendingGames = []; // No more from the database.
+    }, 1200);
+
+  });
+}
+
+ctrl.addGame = function(game) {
+  var a = $('<a href="#">' + game[1] + '</a>');
+  a.click(function(evt) {
+    jibe.sendMessage('{"choose": "'+game[0]+'"}');
+    setTimeout(function(){ Android.redirect(game[0]); }, 100);
+  });
+  var li = $('<li></li>');
+  li.append(a);
+  var list = $('#' + ctrl.listId);
+  list.append(li);
+  setTimeout(function() {
+  list.listview('refresh');  // For dynamically styling buttons that get added.
+  }, 2);
+}
+
+ctrl.init();
+</script>
+</body>
+</html>
