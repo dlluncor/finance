@@ -34,6 +34,6 @@ def GetEndpoints():
   endpoints = [
     ('/to25', To25GamePage),
     ('/bubblepop', BubblePopGamePage),
-    ('/gamearena', GameArenaPage),
+    ('/gameportal', GameArenaPage),
   ]
   return endpoints
