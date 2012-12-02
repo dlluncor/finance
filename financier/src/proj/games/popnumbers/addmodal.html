@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
-	<title>jQuery Mobile Framework - Dialog Example</title> 
+	<title>Submit Dialog</title> 
 	<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />  
 	<!-- <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/> -->
         <style>
@@ -30,7 +30,7 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 </head> 
 <body> 
 
-<div data-role="page">
+  <div data-role="page">
 	
 		<div data-role="header" data-theme="d" data-position="inline">
 			<h1>Dialog</h1>
@@ -45,11 +45,25 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
                         <label for="pathToGame">Link:</label>
                         <input type="text" name="pathGameVal" id="pathToGame" value=""
                            placeholder="Example: www.mygames.com/cows.html">
-			<a href="/gameportal" data-role="button" data-rel="back" data-theme="b">Submit</a>       
+			<span id="submitButton" onclick="woo.awesome();">Submit me</span>
+                        <a href="/gameportal" data-role="button" data-rel="back" data-theme="b"
+                          id="submitDialog">Submit</a>       
 			<a href="/gameportal" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
 		</div>
-	</div>
-
-
+<script>
+  var woo = {};
+  woo.awesome = function() {
+      // Store the name of game and path into local storage.
+      var nameOfGame = $('#nameOfGame').val();
+      var pathToGame = $('#pathToGame').val(); 
+      window.console.log('name of game ' + nameOfGame);
+      window.console.log('path to game ' + pathToGame);
+      localStorage.setItem('nameOfGame', nameOfGame);
+      localStorage.setItem('pathToGame', pathToGame);
+      // Then close the dialog.
+      $('#submitDialog').dialog('close');
+  };
+</script>
+  </div>
 </body>
 </html>

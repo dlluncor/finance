@@ -47,7 +47,7 @@ ctrl.pendingGames = []; // A list of tuples (url, displyable name.)
 
 ctrl.init = function() {
   var games = [
-    ["/to25", "Number Race"],
+    ["http://lluncorstock.appspot.com/to25", "Number Race"],
     //["/bubblepop", "Bubble Pop"]
   ];
   // Add all the hardcoded games.
@@ -69,7 +69,7 @@ ctrl.init = function() {
   $('#' + ctrl.refreshButtonId).click(function() {
     // There is one game pending, should go in
     // add button really.
-    var game = ['/bubblepop', 'Bubble Pop'];
+    var game = ['http://lluncorstock.appspot.com/bubblepop', 'Bubble Pop'];
     ctrl.pendingGames.push(game);
 
     // "Ask database".
