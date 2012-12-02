@@ -11,7 +11,7 @@ ctrl.init = function() {
   var sizes = [20, 30, 50, 40]; // unused.
   var nCols = 4;
 
-  var nRows = 1;
+  var nRows = 4;
   var n = nCols * nRows;
   var shuffler = new Shuffler(n);
   var randomNums = shuffler.arr_;
@@ -139,7 +139,7 @@ Circle = function(sizePx, color, data) {
   // Attach itself to the dom.
   this.el_ = $('<span>' + data + '</span>');
   this.el_.addClass('circle');
-  this.el_.css('background-color', color);
+  this.el_.css('background-image', "url(/img/"+color+"button.png)");
   this.setSize_(data);
 };
 
@@ -147,7 +147,7 @@ Circle.prototype.setSize_ = function(sizePx) {
   // Make size an interesting calculation.
   // TODO: make reasonable size.
   var MAX_SIZE = 85;
-  var MIN_SIZE = 30;
+  var MIN_SIZE = 40;
   var sizePx = Math.random() * sizePx * 10;
   sizePx = Math.min(MAX_SIZE, sizePx);
   // Make sure it is large enough.
@@ -155,8 +155,8 @@ Circle.prototype.setSize_ = function(sizePx) {
 
   this.el_.css('width', sizePx + 'px');
   this.el_.css('height', sizePx + 'px');
-  this.el_.css('-webkit-border-radius', sizePx + 'px');
-  this.el_.css('border-radius', sizePx + 'px');
+  this.el_.css('background-size', sizePx + 'px');
+  this.el_.css('line-height', sizePx + 'px');
 };
 
 Circle.prototype.getData = function() {
