@@ -11,7 +11,7 @@ ctrl.init = function() {
   var sizes = [20, 30, 50, 40]; // unused.
   var nCols = 4;
 
-  var nRows = 1;
+  var nRows = 4;
   var n = nCols * nRows;
   var shuffler = new Shuffler(n);
   var randomNums = shuffler.arr_;
@@ -74,7 +74,7 @@ Canvas.prototype.handleCircleClick = function(circle, e) {
   circle.hide();
   if (clickedNum == this.finishNum_) {
     this.timer_.stop();
-    var timeElapsed = this.timer_.timeElapsed();
+    ctrl.timeElapsed = this.timer_.timeElapsed();
     app.askIfWon();
     return;
   };
