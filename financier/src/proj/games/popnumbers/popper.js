@@ -2,6 +2,10 @@
 var ctrl = {};
 
 ctrl.init = function() {
+  // Clear the state of the parent canvas.
+  var canvasSelector = '#canvas';
+  $(canvasSelector).html('');
+
   // Set up default colors, 
   var colors = ['red', 'blue', 'green', 'yellow'];
   var sizes = [20, 30, 50, 40]; // unused.
@@ -12,7 +16,9 @@ ctrl.init = function() {
   var shuffler = new Shuffler(n);
   var randomNums = shuffler.arr_;
 
-  var canvas = new Canvas('#canvas', 0, n - 1);
+  var START_NUM = 1;
+  var END_NUM = n;
+  var canvas = new Canvas(canvasSelector, START_NUM, END_NUM);
   var ctr = 0;
   for (var i = 0; i < nRows; i++) {
     var row = new Row();
@@ -62,11 +68,27 @@ Canvas.prototype.handleCircleClick = function(circle, e) {
   // The user clicked on the correct circle, hide it.
   circle.hide();
   if (clickedNum == this.finishNum_) {
-    alert('You win!');
     this.timer_.stop();
+    var timeElapsed = this.timer_.timeElapsed();
+    alert('You win! In ' + timeElapsed + ' seconds');
+
+    // Draw a reset button.
+    var resetter = new Resetter();
+    this.el_.append(resetter.asElement());
     return;
   };
   this.correctNum_++;
+};
+
+Resetter = function() {
+  this.el_ = $('<button>Reset</button>');
+  this.el_.click(function() {
+    ctrl.init();
+  });
+};
+
+Resetter.prototype.asElement = function() {
+  return this.el_;
 };
 
 Timer = function() {
@@ -85,17 +107,22 @@ Timer.prototype.start = function() {
   // remaining.
   this.start_ = new Date();
   var googbind = this;
+  this.numIntervals_ = 0;
   this.timeout_ = setInterval(function() {
-    var now = new Date();
     // Calculate difference from when we started.
-    var diff = now - googbind.start_;
-    googbind.timeSpan_.html(diff/1000);
-  }, 2);
+    googbind.numIntervals_++;
+    googbind.timeSpan_.html(googbind.numIntervals_);
+  }, 1000);
 };
 
 Timer.prototype.stop = function() {
   this.end_ = new Date();
   window.clearInterval(this.timeout_);
+};
+
+// Returns time elapsed in seconds.
+Timer.prototype.timeElapsed = function() {
+  return (this.end_ - this.start_)/ 1000;
 };
 
 Timer.prototype.asElement = function() {
@@ -129,13 +156,17 @@ Circle = function(sizePx, color, data) {
 Circle.prototype.setSize_ = function(sizePx) {
   // Make size an interesting calculation.
   // TODO: make reasonable size.
-  var MAX_SIZE = 100;
+  var MAX_SIZE = 85;
+  var MIN_SIZE = 30;
   var sizePx = Math.random() * sizePx * 10;
   sizePx = Math.min(MAX_SIZE, sizePx);
+  // Make sure it is large enough.
+  sizePx = Math.max(MIN_SIZE, sizePx);
 
   this.el_.css('width', sizePx + 'px');
   this.el_.css('height', sizePx + 'px');
   this.el_.css('-webkit-border-radius', sizePx + 'px');
+  this.el_.css('border-radius', sizePx + 'px');
 };
 
 Circle.prototype.getData = function() {
@@ -149,7 +180,7 @@ Circle.prototype.asElement = function() {
 // The handler must have a function handleCircleClick.
 Circle.prototype.setClickHandler = function(handler) {
   var googbind = this; 
-  this.el_.click(function(e) {
+  this.el_.bind('touchstart', function(e) {
     handler.handleCircleClick(googbind); 
   });
 }
@@ -167,7 +198,8 @@ Shuffler = function(n) {
 
 Shuffler.prototype.createArr_ = function(n) {
   var arr = [];
-  for (var i = 0; i < n; i++) {
+  // Create numbers from 1 to n :(
+  for (var i = 1; i <= n; i++) {
     arr.push(i);
   }
   return arr;
