@@ -1,5 +1,11 @@
 // Controller only knows about the existence of one game.
 var ctrl = {};
+var randomColor = function() {
+  var str = 'rgb(';
+  for(var i = 0; i < 3; i++) str += Math.floor(Math.random() * 256) + ',';
+  return str.substring(0,str.length-1) + ')';
+};
+
 ctrl.canvasSelector = '#canvas';
 
 // Called when the game is ready to start.
@@ -24,7 +30,7 @@ ctrl.init = function() {
     var row = new Row();
     for (var j = 0; j < colors.length; j++) {
       var data = randomNums[ctr];
-      var circle = new Circle(sizes[j], colors[j],
+      var circle = new Circle(sizes[j], randomColor(),
                               data);
       circle.setClickHandler(canvas);
       row.addCircle(circle);
@@ -139,24 +145,28 @@ Circle = function(sizePx, color, data) {
   // Attach itself to the dom.
   this.el_ = $('<span>' + data + '</span>');
   this.el_.addClass('circle');
-  this.el_.css('background-image', "url(/img/"+color+"button.png)");
+  this.el_.css('background-color', color);
   this.setSize_(data);
 };
 
 Circle.prototype.setSize_ = function(sizePx) {
   // Make size an interesting calculation.
   // TODO: make reasonable size.
-  var MAX_SIZE = 85;
-  var MIN_SIZE = 40;
+  var MAX_SIZE = 120;
+  var MIN_SIZE = 60;
   var sizePx = Math.random() * sizePx * 10;
   sizePx = Math.min(MAX_SIZE, sizePx);
   // Make sure it is large enough.
   sizePx = Math.max(MIN_SIZE, sizePx);
-
+  this.el_.css('position', 'absolute');
+  this.el_.css('left', Math.floor(Math.random() * 200));
+  this.el_.css('top', Math.floor(Math.random()*360));
   this.el_.css('width', sizePx + 'px');
   this.el_.css('height', sizePx + 'px');
   this.el_.css('background-size', sizePx + 'px');
+  this.el_.css('border-radius', sizePx + 'px');
   this.el_.css('line-height', sizePx + 'px');
+  this.el_.css('opacity', Math.min(Math.random() + 0.5, 1));
 };
 
 Circle.prototype.getData = function() {
@@ -176,13 +186,20 @@ Circle.prototype.setClickHandler = function(handler) {
 }
 
 Circle.prototype.hide = function() {
-  this.el_.css('visibility', 'hidden');
-};
+  var tmp = this;
+  tmp.el_.css('box-shadow', '0px 0px 40px 40px rgba(255,255,0,0.3)');
+  tmp.el_.animate({
+    'opacity': 0
+  }, 200, function(){ 
+    tmp.el_.css('visibility', 'hidden');
+  });
+}; 
 
 // Shuffles numbers from 0 to n.
 Shuffler = function(n) {
   this.arr_ = this.createArr_(n);
-  this.arr_ = this.shuffleArr_(this.arr_);
+  this.arr_.reverse();
+  //this.arr_ = this.shuffleArr_(this.arr_);
   Util.printArr(this.arr_);
 };
 
