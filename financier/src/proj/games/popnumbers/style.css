@@ -12,3 +12,9 @@
   vertical-align: middle;
   margin:5px;
 }
+
+.backarrow {
+  /*background-size: 100px;
+  background-image: url('/img/backarrow.png');*/
+  padding-right: 10px;
+}

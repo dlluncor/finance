@@ -115,6 +115,10 @@ app.pageLoad = function() {
     $('#startButton').html('Start');
     app.askIfPartnerReady();
   });
+  // Sets up click handler on the go back button.
+  $('#backarrow').click(function() {
+    window.location.href = 'http://lluncorstock.appspot.com/gameportal';
+  });
 };
 
 // If you are the first person to click on start, then you can ask

@@ -25,6 +25,8 @@
   </div>
 </div>
 <script>
+var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
+
   // Jibe JS API.
 var jibe = {};
 jibe.receiveMessage = function(str) {
@@ -35,8 +37,6 @@ jibe.receiveMessage = function(str) {
 jibe.sendMessage = function(str) {
   Android.sendMessage(str);
 };
-
-//var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
 </script>
 <script>
 var ctrl = {};
