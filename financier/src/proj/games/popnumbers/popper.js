@@ -3,10 +3,7 @@ var ctrl = {};
 
 // Called when the game is ready to start.
 ctrl.init = function() {
-
-  // Clear the state of the parent canvas.
-  var canvasSelector = '#canvas';
-  $(canvasSelector).html('');
+  ctrl.clearCanvas();
 
   // Set up default colors, 
   var colors = ['red', 'blue', 'green', 'yellow'];
@@ -34,6 +31,12 @@ ctrl.init = function() {
     }
     canvas.addRow(row);
   }
+};
+
+ctrl.clearCanvas = function() {
+   // Clear the state of the parent canvas.
+  var canvasSelector = '#canvas';
+  $(canvasSelector).html(''); 
 };
 
 // selector - parent div selector.
