@@ -11,7 +11,7 @@ ctrl.init = function() {
   var sizes = [20, 30, 50, 40]; // unused.
   var nCols = 4;
 
-  var nRows = 4;
+  var nRows = 1;
   var n = nCols * nRows;
   var shuffler = new Shuffler(n);
   var randomNums = shuffler.arr_;
