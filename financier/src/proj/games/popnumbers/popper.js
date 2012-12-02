@@ -1,5 +1,6 @@
 // Controller only knows about the existence of one game.
 var ctrl = {};
+ctrl.canvasSelector = '#canvas';
 
 // Called when the game is ready to start.
 ctrl.init = function() {
@@ -10,14 +11,14 @@ ctrl.init = function() {
   var sizes = [20, 30, 50, 40]; // unused.
   var nCols = 4;
 
-  var nRows = 4;
+  var nRows = 1;
   var n = nCols * nRows;
   var shuffler = new Shuffler(n);
   var randomNums = shuffler.arr_;
 
   var START_NUM = 1;
   var END_NUM = n;
-  var canvas = new Canvas(canvasSelector, START_NUM, END_NUM);
+  var canvas = new Canvas(ctrl.canvasSelector, START_NUM, END_NUM);
   var ctr = 0;
   for (var i = 0; i < nRows; i++) {
     var row = new Row();
@@ -35,8 +36,7 @@ ctrl.init = function() {
 
 ctrl.clearCanvas = function() {
    // Clear the state of the parent canvas.
-  var canvasSelector = '#canvas';
-  $(canvasSelector).html(''); 
+  $(ctrl.canvasSelector).html(''); 
 };
 
 // selector - parent div selector.
@@ -75,30 +75,14 @@ Canvas.prototype.handleCircleClick = function(circle, e) {
   if (clickedNum == this.finishNum_) {
     this.timer_.stop();
     var timeElapsed = this.timer_.timeElapsed();
-    //alert('You win! In ' + timeElapsed + ' seconds');
-
-    // Draw a reset button. TODO: delete
-    var resetter = new Resetter();
-    this.el_.append(resetter.asElement());
     app.askIfWon();
     return;
   };
   this.correctNum_++;
 };
 
-Resetter = function() {
-  this.el_ = $('<button>Reset</button>');
-  this.el_.click(function() {
-    ctrl.init();
-  });
-};
-
-Resetter.prototype.asElement = function() {
-  return this.el_;
-};
-
 Timer = function() {
-  this.el_ = $('<div>Seconds elapsed: </div>');
+  this.el_ = $('<span class="timer">Seconds elapsed: </span>');
   this.timeSpan_ = $('<span></span>');
   this.el_.append(this.timeSpan_);
 
