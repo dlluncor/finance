@@ -1,7 +1,9 @@
-
+// Controller only knows about the existence of one game.
 var ctrl = {};
 
+// Called when the game is ready to start.
 ctrl.init = function() {
+
   // Clear the state of the parent canvas.
   var canvasSelector = '#canvas';
   $(canvasSelector).html('');
@@ -70,11 +72,12 @@ Canvas.prototype.handleCircleClick = function(circle, e) {
   if (clickedNum == this.finishNum_) {
     this.timer_.stop();
     var timeElapsed = this.timer_.timeElapsed();
-    alert('You win! In ' + timeElapsed + ' seconds');
+    //alert('You win! In ' + timeElapsed + ' seconds');
 
-    // Draw a reset button.
+    // Draw a reset button. TODO: delete
     var resetter = new Resetter();
     this.el_.append(resetter.asElement());
+    app.askIfWon();
     return;
   };
   this.correctNum_++;
@@ -230,6 +233,3 @@ Util.printArr = function(arr) {
   window.console.log(arr.join(' '));
   window.console.log('Length ' + arr.length);
 };
-
-
-$(document).ready(ctrl.init)
