@@ -17,6 +17,9 @@ handlers:
 - url: /proj/education/js
   static_dir: proj/education/js
 
+- url: /proj/games/popnumbers
+  static_dir: proj/games/popnumbers
+
 - url: /css
   static_dir: css
 
