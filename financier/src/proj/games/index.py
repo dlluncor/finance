@@ -24,9 +24,16 @@ class BubblePopGamePage(webapp.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), 'templates', 'bubblepop.html')
     self.response.out.write(template.render(path, values))
 
+class GameArenaPage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'game_portal.html')
+    self.response.out.write(template.render(path, values))
+
 def GetEndpoints():
   endpoints = [
     ('/to25', To25GamePage),
     ('/bubblepop', BubblePopGamePage),
+    ('/gamearena', GameArenaPage),
   ]
   return endpoints
