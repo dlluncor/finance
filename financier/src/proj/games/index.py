@@ -15,11 +15,18 @@ from django.utils import simplejson
 class To25GamePage(webapp.RequestHandler):
   def get(self):
     values = {}
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'pop.html')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'popto25.html')
+    self.response.out.write(template.render(path, values))
+
+class BubblePopGamePage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'bubblepop.html')
     self.response.out.write(template.render(path, values))
 
 def GetEndpoints():
   endpoints = [
     ('/to25', To25GamePage),
+    ('/bubblepop', BubblePopGamePage),
   ]
   return endpoints
