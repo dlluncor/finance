@@ -45,7 +45,7 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
                         <label for="pathToGame">Link:</label>
                         <input type="text" name="pathGameVal" id="pathToGame" value=""
                            placeholder="Example: www.mygames.com/cows.html">
-			<span id="submitButton" onclick="woo.awesome();">Submit me</span>
+			<span id="submitButton">Submit me</span>
                         <a href="/gameportal" data-role="button" data-rel="back" data-theme="b"
                           id="submitDialog">Submit</a>       
 			<a href="/gameportal" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
@@ -63,6 +63,11 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
       // Then close the dialog.
       $('#submitDialog').dialog('close');
   };
+  var my = {};
+  my.start = function() {
+    window.console.log('calling a start');
+  };
+  //my.start();
 </script>
   </div>
 </body>

@@ -14,18 +14,23 @@
 <body> 
 <div data-role="page" id="thepage">
   <ul id="gamelist" data-role="listview" data-theme="c"></ul>
-  <div id="footer"> 
+  <div id="footer">
+    <div>
+       <a href="#" data-role="button" data-icon="star" data-inline="true"
+        id="tryMeButton">Try out: Draw Me!</a>  
+    </div>
+    <div> 
     <a href="#" data-role="button" data-icon="refresh" data-inline="true"
         id="refreshButton">Refresh</a>
     <a href="proj/games/popnumbers/addmodal.html" data-role="button" 
         data-icon="plus" data-inline="true"
         data-rel="dialog"
-        id="addButton">Add
-    </a>
+        id="addButton">Add</a>
+    </div>
   </div>
 </div>
 <script>
-var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
+//var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
 
   // Jibe JS API.
 var jibe = {};
@@ -82,6 +87,11 @@ ctrl.init = function() {
     }, 1200);
 
   });
+
+  // Wait for hash changes.
+  /*$(window).bind('hashchange', function() {
+    alert('hash change');
+  }); */
 }
 
 ctrl.addGame = function(game) {

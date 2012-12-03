@@ -51,7 +51,7 @@ Canvas = function(selector, startNum, finishNum) {
   this.el_ = $(selector);
   // Add a timer to the top.
   this.timer_ = new Timer();
-  this.el_.append(this.timer_.asElement());
+  //this.el_.append(this.timer_.asElement());
 
   this.correctNum_ = startNum; // Current number the user needs to select.
   this.startNum_ = startNum; // Starting number to click on.

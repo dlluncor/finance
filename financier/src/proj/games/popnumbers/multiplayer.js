@@ -117,7 +117,7 @@ app.pageLoad = function() {
   });
   // Sets up click handler on the go back button.
   $('#backarrow').click(function() {
-    window.location.href = 'http://lluncorstock.appspot.com/gameportal';
+    Android.redirect('http://lluncorstock.appspot.com/gameportal');
   });
 };
 
