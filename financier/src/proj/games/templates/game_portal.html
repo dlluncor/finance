@@ -16,11 +16,11 @@
   <ul id="gamelist" data-role="listview" data-theme="c"></ul>
   <div id="footer">
     <a href="proj/games/popnumbers/addmodal.html" data-role="button" data-icon="plus"
-        data-rel="dialog" id="addButton">Add</a>
+        id="addButton">Add</a>
   </div>
 </div>
 <script>
-//var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
+var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
 
   // Jibe JS API.
 var jibe = {};
@@ -78,10 +78,22 @@ ctrl.init = function() {
 
   });
 
-  // Wait for hash changes.
-  /*$(window).bind('hashchange', function() {
-    alert('hash change');
-  }); */
+  // Every time the page shows, check to see if we need to access
+  // local storage to add new list items.
+  // The modal to add items should have added items if possible.
+  $('#thepage').live('pageshow', function() {
+    var pathToGame = localStorage.getItem('pathToGame');
+    var nameOfGame = localStorage.getItem('nameOfGame');
+    if (pathToGame && nameOfGame) {
+      var game = [pathToGame, nameOfGame];
+      ctrl.addGame(game);
+      // Reset it so there can only be one path one name of game.
+      localStorage.setItem('pathToGame', '');
+      localStorage.setItem('nameOfGame', '');
+      //TODO: Send message to friend he needs to update which games he has
+      // as well.
+    }  
+  });
 }
 
 ctrl.addGame = function(game) {

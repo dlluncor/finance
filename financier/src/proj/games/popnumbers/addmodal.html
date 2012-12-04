@@ -29,46 +29,34 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 </head> 
 <body> 
-
   <div data-role="page">
-	
-		<div data-role="header" data-theme="d" data-position="inline">
-			<h1>Dialog</h1>
+	<div data-role="header" data-theme="d" data-position="inline">
+		<h1>Dialog</h1>
+	</div>
 
-		</div>
-
-		<div data-role="content" data-theme="c">
-			<h1>Add a new game!</h1>
-                        <label for="nameOfGame">Name:</label>
-                        <input type="text" name="nameOfGameVal" id="nameOfGame" value=""
-                           placeholder="Example: Cows go kabloom"> 
-                        <label for="pathToGame">Link:</label>
-                        <input type="text" name="pathGameVal" id="pathToGame" value=""
-                           placeholder="Example: www.mygames.com/cows.html">
-			<span id="submitButton">Submit me</span>
-                        <a href="/gameportal" data-role="button" data-rel="back" data-theme="b"
-                          id="submitDialog">Submit</a>       
-			<a href="/gameportal" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
-		</div>
-<script>
-  var woo = {};
-  woo.awesome = function() {
-      // Store the name of game and path into local storage.
-      var nameOfGame = $('#nameOfGame').val();
-      var pathToGame = $('#pathToGame').val(); 
-      window.console.log('name of game ' + nameOfGame);
-      window.console.log('path to game ' + pathToGame);
-      localStorage.setItem('nameOfGame', nameOfGame);
-      localStorage.setItem('pathToGame', pathToGame);
-      // Then close the dialog.
-      $('#submitDialog').dialog('close');
-  };
-  var my = {};
-  my.start = function() {
-    window.console.log('calling a start');
-  };
-  //my.start();
-</script>
+	<div data-role="content" data-theme="c">
+		<h1>Add a new game!</h1>
+                       <label for="nameOfGame">Name:</label>
+                       <input type="text" name="nameOfGameVal" id="nameOfGame" value=""
+                          placeholder="Example: Cows go kabloom"> 
+                       <label for="pathToGame">Link:</label>
+                       <input type="text" name="pathGameVal" id="pathToGame" value=""
+                          placeholder="Example: www.mygames.com/cows.html">
+                       <a href="/gameportal#meee" data-role="button" data-rel="back" data-theme="b"
+                         id="submitDialog">Submit</a>       
+		<a href="/gameportal" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+	</div>
+        <!-- JS must be INSIDE the data-role page div, gawd. -->
+        <script type="text/javascript">
+          $('#submitDialog').click(function() {
+            var pathToGame = $('#pathToGame').val();
+            var nameOfGame = $('#nameOfGame').val();
+            // Store the most recent name of game into local storage.
+            localStorage.setItem('pathToGame', pathToGame);
+            localStorage.setItem('nameOfGame', nameOfGame); 
+          });
+          window.console.log('waaah');
+        </script>
   </div>
 </body>
 </html>
