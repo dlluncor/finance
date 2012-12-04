@@ -20,7 +20,7 @@
   </div>
 </div>
 <script>
-var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
+//var Android = {}; Android.redirect = function(url) { window.location.href = url;}; Android.sendMessage = function(str) {window.console.log('Sending message: ' + str)};
 
   // Jibe JS API.
 var jibe = {};
@@ -42,8 +42,7 @@ ctrl.pendingGames = []; // A list of tuples (url, displyable name.)
 
 ctrl.init = function() {
   var games = [
-    ["http://lluncorstock.appspot.com/to25", "Number Race"],
-    //["/bubblepop", "Bubble Pop"]
+    ["http://html5-with-jibe.appspot.com/to25", "Number Race"],
   ];
   // Add all the hardcoded games.
   for (var i = 0; i < games.length; i++) {
