@@ -1,0 +1,4 @@
+cron:
+-  description: update a calendar event
+   url: /updatecalendar
+   schedule: every 1 minutes
