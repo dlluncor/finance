@@ -22,6 +22,7 @@ from simulator import assets
 from analysis import question1
 from analysis import question3
 from ticker_symbols import ticker_mapper
+import updatecalendar
 
 class MainPage(webapp.RequestHandler):
   def get(self):
@@ -84,6 +85,7 @@ def main():
     ('/stock_history_results', StockHistoryEndPoint),
     ('/stock_comparison_results', StockComparisonEndPoint),
     ('/ticker_symbol_suggestions', TickerSymbolSuggestionsEndPoint),
+    ('/updatecalendar', updatecalendar.UpdateCalendarHandler),
   ]
   health_endpoints = health_index.GetEndpoints()
   education_endpoints = education_index.GetEndpoints()
