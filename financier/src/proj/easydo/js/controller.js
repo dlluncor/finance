@@ -77,7 +77,7 @@ controller.createAppStateHandler = function() {
 	});
 
 	setTimeout(function() {
-      window.location.hash = '#';
+      window.location.hash = '#preferences';
 	}, 1);
 };
 
@@ -86,7 +86,24 @@ controller.createAppStateHandler = function() {
 controller.addHandlers = function() {
   // Trigger.
   $('#flightSearchBtn').click(function(e) {
-  	
+  	var startDate = $('#startDateInput').val();
+  	var endDate = $('#endDateInput').val();
+  	print(startDate);
+  	print(endDate);
+
+  	var fromLocation = $('#fromLocationSelect').val();
+  	var toLocation = $('#toLocationSelect').val();
+  	print(fromLocation);
+  	print(toLocation);
+
+  	var params = {
+      'startDate': startDate,
+      'endDate': endDate,
+      'fromLocation': fromLocation,
+      'toLocation': toLocation
+  	};
+
+    gooru.fetchResults_(params);
   });
 };
 

@@ -19,32 +19,20 @@ gooru.renderErrorResults_ = function(xhr, textStatus, errorThrown) {
   $('#' + gooru.resultElId).html('Boo gooru results failed.');
 };
 
-gooru.buildRequestUrl_ = function() {
-  var reqUrl = '/gooru?';
-  var params = {};
-  params['query'] = $('#searchGooruInput').val();
+// Object with all the key value pairs needed.
+gooru.buildRequestUrl_ = function(params) {
+  var reqUrl = '/initiate_trigger?';
   for (var key in params) {
     reqUrl += key + '=' + params[key] + '&';
   }
   return reqUrl;
 };
 
-gooru.fetchResults_ = function(opt_e) {
+gooru.fetchResults_ = function(params) {
   $.ajax({
     dataType: 'json',
-    url: gooru.buildRequestUrl_(),
+    url: gooru.buildRequestUrl_(params),
     success: gooru.renderResults_,
     error: gooru.renderErrorResults_
   });
 };
-
-gooru.init_ = function() {
-  $('#searchGooruInput').bind('keypress', function(e) {
-    if (e.keyCode == 13) {
-      // Enter pressed.
-      gooru.fetchResults_();
-    }
-  });
-};
-
-$(document).ready(gooru.init_);

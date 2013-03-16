@@ -2,11 +2,14 @@
 End points for easydo applications.
 """
 
+import pdb
 # Self defined modules.
 
 # Generic modules.
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
+
+import logging
 
 import os
 from django.utils import simplejson
@@ -15,7 +18,10 @@ from django.utils import simplejson
 class TriggerEndPoint(webapp.RequestHandler):
   def get(self):
    d = {}
-   query = self.request.get('query')
+   get_dictionary = self.request.GET
+   print 'Start date:'
+   #pdb.set_trace()
+   logging.info(get_dictionary['startDate'])
    results = []
    d['results'] = results
    json = simplejson.dumps(d)
