@@ -77,7 +77,7 @@ controller.createAppStateHandler = function() {
 	});
 
 	setTimeout(function() {
-      window.location.hash = '#preferences';
+      window.location.hash = '#trigger';
 	}, 1);
 };
 
@@ -104,6 +104,25 @@ controller.addHandlers = function() {
   	};
 
     gooru.fetchResults_(params);
+  });
+
+  $('#scrapeEmailBtn').click(function(e) {
+  	var emailText = $('#gmailNote').val();
+  	print(emailText);
+  	var cityInfo = cityparser.getCity(emailText);
+  	print(cityInfo);
+  	// Change the hash, and then fill in the values.
+  	$('#startDateInput').val(cityInfo.startDate);
+  	$('#endDateInput').val(cityInfo.endDate);
+
+    var cityMapping = {
+      'San Jose': 'SJC',
+      'San Francisco': 'SFO'
+    };
+  	var cityToName = cityMapping[cityInfo.toLocation];
+  	$('#toLocationSelect').val(cityToName);
+
+  	window.location.hash = '#preferences';
   });
 };
 

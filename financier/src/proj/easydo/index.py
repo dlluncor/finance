@@ -110,10 +110,10 @@ class TriggerEndPoint(webapp.RequestHandler):
 
 class DoActionEndPoint(webapp.RequestHandler):
   def get(self):
-    print('hello you called my get function')
+    logging.info('hello you called my get function')
 
   def post(self):
-    print('hello you called my POST POST POST function')
+    logging.info('hello you called my POST POST POST function')
 
 ## HTML pages.
 class PreferencesMainPage(webapp.RequestHandler):
