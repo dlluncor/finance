@@ -2,6 +2,8 @@ var gooru = {};
 gooru.resultElId = 'searchGooruResults';
 
 gooru.renderResults_ = function(response) {
+  print(response);
+  /*
   $('#' + gooru.resultElId).html('');
   var el = $('#' + gooru.resultElId);
   if (response.results.length == 0) {
@@ -11,7 +13,7 @@ gooru.renderResults_ = function(response) {
   var table = $('<table></table>');
   el.append(table);
   var searchResultTmpl = $('#searchResultTmpl');
-  $.tmpl(searchResultTmpl, response.results).appendTo(table); 
+  $.tmpl(searchResultTmpl, response.results).appendTo(table); */
 };
 
 gooru.renderErrorResults_ = function(xhr, textStatus, errorThrown) {

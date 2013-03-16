@@ -14,14 +14,22 @@ import logging
 import os
 from django.utils import simplejson
 
+class Constants(object):
+  DEFAULT_SOURCE = 'http://www.cleartrip.com/api/docs/air-api/schemas/search-result.xml'
+
+class FlightContacter(object):
+  
+  def __init__(self, xml_source = Constants.DEFAULT_SOURCE):
+    self.xml_source = xml_source
+    pass
+
 ## JSON endpoints.
 class TriggerEndPoint(webapp.RequestHandler):
   def get(self):
    d = {}
-   get_dictionary = self.request.GET
-   print 'Start date:'
+   for key in self.request.GET:
+     d[key] = str(self.request.GET[key])
    #pdb.set_trace()
-   logging.info(get_dictionary['startDate'])
    results = []
    d['results'] = results
    json = simplejson.dumps(d)
