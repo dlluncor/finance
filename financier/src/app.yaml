@@ -29,6 +29,13 @@ handlers:
 - url: /img
   static_dir: img
 
+# Getting bootstrap assets.
+- url: /assets/css
+  static_dir: assets/css
+
+- url: /assets/js
+  static_dir: assets/js
+
 - url: /.*
   script: index.py
 

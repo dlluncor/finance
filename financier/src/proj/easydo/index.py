@@ -1,5 +1,5 @@
 """
-End points for health applications.
+End points for easydo applications.
 """
 
 # Self defined modules.
@@ -29,7 +29,7 @@ class PreferencesMainPage(webapp.RequestHandler):
     values['entries'] = ['Find online resources for any topic.']
     popular_queries = ['cells', 'chinese', 'computers']
     values['popular_queries'] = popular_queries
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'easydo_pref_home.html')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'easydo_pref_home2.html')
     self.response.out.write(template.render(path, values))
 
 def GetEndpoints():
