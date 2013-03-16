@@ -79,6 +79,11 @@ class Stats(object):
     d['zscore'] = my_zscore
     d['mean'] = self.mean
     d['sample_stdev'] = self.sampling_stdev_sample_mean
+
+    # Send to easydo.
+    d['flightName'] = 'Southwest'
+    d['hotelName'] = 'Mariott'
+    d['carRental'] = 'Hertz'
     return d
 
 ## JSON endpoints.
@@ -96,7 +101,7 @@ class TriggerEndPoint(webapp.RequestHandler):
 
    # If we have found a cheap flight, send a trigger to EasyDo.
    easydo = easydoer.EasyDoer()
-   easydo.Run()
+   easydo.Run(d)
 
    #pdb.set_trace()
    json = simplejson.dumps(d)
