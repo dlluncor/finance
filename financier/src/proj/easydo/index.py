@@ -108,6 +108,13 @@ class TriggerEndPoint(webapp.RequestHandler):
    self.response.headers.add_header('content-type', 'application/json', charset='utf-8') 
    self.response.out.write(json)
 
+class DoActionEndPoint(webapp.RequestHandler):
+  def get(self):
+    print('hello you called my get function')
+
+  def post(self):
+    print('hello you called my POST POST POST function')
+
 ## HTML pages.
 class PreferencesMainPage(webapp.RequestHandler):
   def get(self):
@@ -120,6 +127,7 @@ class PreferencesMainPage(webapp.RequestHandler):
 
 def GetEndpoints():
   endpoints = [
+    ('/doaction', DoActionEndPoint),
     ('/initiate_trigger', TriggerEndPoint),
     ('/easydo_preferences', PreferencesMainPage),
   ]

@@ -42,11 +42,6 @@ handlers:
 - url: /.*
   script: index.py
 
-# Cron job for updating calendar events (dads service)
-- url: /updatecalendar
-  script: updatecalendar.py
-  login: admin
-
 libraries:
 - name: django
   version: "1.3"
