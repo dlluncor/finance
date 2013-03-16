@@ -1,6 +1,10 @@
 // To control all the main interactions on the finance page.
 var controller = {};
 
+print = function(string) {
+  window.console.log(string);
+};
+
 controller.init_ = function() {
 /*	$('ul.tabs').each(function(){
 		  // For each set of tabs, we want to keep track of
@@ -35,8 +39,57 @@ controller.init_ = function() {
 		  });
 	}); */
 
+  controller.createAppStateHandler();
   controller.insertTemplates();
+  controller.addHandlers();
 };
+
+// hash state handler.
+var hasher = {};
+
+// #trigger?key1=val1&key2=val2
+hasher.getAction = function(hashString) {
+  hashString = hashString.replace('#', '');
+  var els = hashString.split('?');
+  return els[0];
+};
+
+controller.handleAction = function(action) {
+  print(action);
+  if (action == 'trigger') {
+    $('#triggerDiv').css('display', 'block');
+    $('#preferencesDiv').css('display', 'none');
+  } else if (action == 'preferences') {
+    $('#triggerDiv').css('display', 'none');
+    $('#preferencesDiv').css('display', 'block');
+  } else {
+    // Make trigger the default action.
+  	$('#triggerDiv').css('display', 'block');
+    $('#preferencesDiv').css('display', 'none');
+  }
+};
+
+controller.createAppStateHandler = function() {
+	$(window).bind('hashchange', function() {
+		var hash = window.location.hash;
+        var action = hasher.getAction(hash);
+        controller.handleAction(action);
+	});
+
+	setTimeout(function() {
+      window.location.hash = '#';
+	}, 1);
+};
+
+// Button handlers.
+
+controller.addHandlers = function() {
+  // Trigger.
+  $('#flightSearchBtn').click(function(e) {
+  	
+  });
+};
+
 
 controller.insertTemplates = function() {
   function loadTemplate(tObj) {
