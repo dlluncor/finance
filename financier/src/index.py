@@ -17,6 +17,7 @@ from proj.health import index as health_index
 from proj.education import index as education_index
 from proj.reading import index as reading_index
 from proj.games import index as games_index
+from proj.easydo import index as easydo_index
 
 from simulator import assets
 from analysis import question1
@@ -91,8 +92,9 @@ def main():
   education_endpoints = education_index.GetEndpoints()
   reading_endpoints = reading_index.GetEndpoints()
   games_endpoints = games_index.GetEndpoints()
+  easydo_endpoints = easydo_index.GetEndpoints()
   endpoints = (finance_endpoints + health_endpoints + education_endpoints +
-      reading_endpoints + games_endpoints)
+      reading_endpoints + games_endpoints + easydo_endpoints)
   application = webapp.WSGIApplication(endpoints, debug=True)
   run_wsgi_app(application)
 

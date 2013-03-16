@@ -5,13 +5,15 @@ from google.appengine.api import mail
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-import atom
+"""
 import gdata.alt.appengine
 import gdata.auth
 import gdata.calendar
 import gdata.calendar.service
+"""
 
 # Reconstruct the Calendar entry, and update the information.
+"""
                     cal_event = gdata.calendar.CalendarEventEntryFromString(
                         str(event.gcal_event_xml))
                     # Modify the event's Google Calendar entry
@@ -33,6 +35,7 @@ import gdata.calendar.service
                     try:
                         updated_entry = calendar_client.UpdateEvent(str(event.edit_link),
                                                                     cal_event)
+"""
 
 class UpdateCalendarHandler(webapp.RequestHandler):
     def __init__(self):
