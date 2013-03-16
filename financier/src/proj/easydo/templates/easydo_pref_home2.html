@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>EasilyDo Flights</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      .gmailNote {
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../assets/css/mystyle.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#"></a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">david.lluncor</a>
+            </p>
+            <ul class="nav">
+              <li><a href="#trigger">Trigger</a></li>
+              <li><a href="#preferences">Preferences</a></li> <!-- class="active" -->
+              <li><a href="#action">Action</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+<div id="triggerDiv" style="display:none;">
+   <div class="textarea">
+   <textarea class="gmailNote">
+    Hi Mr. Lluncor, 
+ 
+    You've been cordially invited to:
+ 
+    EasilyDo Hackathon
+    Where: San Jose, CA
+    When: 3/15/2013 from 3/17/2013
+ 
+      David
+   </textarea>
+ </div>
+   <div class="controls">
+    <button class="btn btn-success">Scrape email</button>
+  </div>
+</div>
+
+<!-- Start of preferences html. -->
+<div id="preferencesDiv">
+    <div class="container-fluid">
+<div id="target" class="form-horizontal">
+              <fieldset><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+    &lt;label class='control-label'&gt; Form Name &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='name' id='name' value ='EasyDo Flights, Go!' /&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Form Name" data-trigger="manual" data-html="true"><!-- Form Name -->
+<h2>EasyDo Flights, Go!</h2>
+</div><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+      
+      
+      
+      
+      
+      
+    &lt;label class='control-label'&gt; Label Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='label' id='label' value ='' /&gt;
+&lt;label class='control-label'&gt; Prepend &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='prepend' id='prepend' value ='Start Date' /&gt;
+&lt;label class='control-label'&gt; Placeholder &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='placeholder' id='placeholder' value ='3/15/2013' /&gt;
+&lt;label class='control-label'&gt; Help Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='helptext' id='helptext' value ='' /&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Prepended Text" data-trigger="manual" data-html="true"><!-- Prepended text-->
+<label class="control-label"></label>
+<div class="controls">
+  <div class="input-prepend">
+    <span class="add-on">Start Date</span>
+    <input class="span2" placeholder="3/15/2013" type="text" id="startDateInput" value="3/15/2013">
+  </div>
+  <p class="help-block"></p>
+</div>
+</div><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+      
+      
+      
+      
+      
+      
+    &lt;label class='control-label'&gt; Label Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='label' id='label' value ='' /&gt;
+&lt;label class='control-label'&gt; Prepend &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='prepend' id='prepend' value ='End Date' /&gt;
+&lt;label class='control-label'&gt; Placeholder &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='placeholder' id='placeholder' value ='3/17/2013' /&gt;
+&lt;label class='control-label'&gt; Help Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='helptext' id='helptext' value ='' /&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Prepended Text" data-trigger="manual" data-html="true"><!-- Prepended text-->
+<label class="control-label"></label>
+<div class="controls">
+  <div class="input-prepend">
+    <span class="add-on">End Date</span>
+    <input class="span2" placeholder="3/17/2013" type="text" id="endDateInput" value="3/17/2013">
+  </div>
+  <p class="help-block"></p>
+</div>
+</div><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+      
+      
+    &lt;label class='control-label'&gt; Label Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='label' id='label' value ='From' /&gt;
+&lt;label class='control-label'&gt; Options &lt;/label&gt;
+&lt;textarea class=&quot;field&quot; data-type=&quot;textarea-split&quot; style='min-height: 200px' id='options'&gt;LAX
+SAN&lt;/textarea&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Select Basic" data-trigger="manual" data-html="true"><!-- Select Basic -->
+<label class="control-label">From</label>
+<div class="controls">
+  <select class="input-xlarge" id="fromLocationSelect">
+    <option>LAX</option>
+    <option>SAN</option>
+  </select>
+</div>
+</div><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+      
+      
+    &lt;label class='control-label'&gt; Label Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='label' id='label' value ='To' /&gt;
+&lt;label class='control-label'&gt; Options &lt;/label&gt;
+&lt;textarea class=&quot;field&quot; data-type=&quot;textarea-split&quot; style='min-height: 200px' id='options'&gt;SJC
+SFO&lt;/textarea&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Select Basic" data-trigger="manual" data-html="true"><!-- Select Basic -->
+<label class="control-label">To</label>
+<div class="controls">
+  <select class="input-xlarge" id="toLocationSelect">
+    <option>SJC</option>
+    <option>SFO</option>
+  </select>
+</div>
+</div><div class="control-group" data-content="&lt;form class='form'&gt;
+  &lt;div class='controls'&gt;
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    &lt;label class='control-label'&gt; Label Text &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='label' id='label' value ='Start trigger' /&gt;
+&lt;label class='control-label'&gt; Button Label &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='button1label' id='button1label' value ='Search' /&gt;
+&lt;label class='control-label'&gt; Button Type &lt;/label&gt;
+&lt;select class=&quot;field&quot; data-type=&quot;select&quot; style='min-height: 200px' id='button1type'&gt;
+
+  &lt;option value=&quot;btn-default&quot;  &gt;Default&lt;/option&gt;
+
+  &lt;option value=&quot;btn-primary&quot;  &gt;Primary&lt;/option&gt;
+
+  &lt;option value=&quot;btn-info&quot;  &gt;Info&lt;/option&gt;
+
+  &lt;option value=&quot;btn-success&quot;  selected  &gt;Success&lt;/option&gt;
+
+  &lt;option value=&quot;btn-warning&quot;  &gt;Warning&lt;/option&gt;
+
+  &lt;option value=&quot;btn-danger&quot;  &gt;Danger&lt;/option&gt;
+
+  &lt;option value=&quot;btn-inverse&quot;  &gt;Inverse&lt;/option&gt;
+
+&lt;/select&gt;
+&lt;label class='control-label'&gt; Button Label &lt;/label&gt;
+&lt;input class='input-large field' data-type=&quot;input&quot; type='text' name='button2label' id='button2label' value ='' /&gt;
+&lt;label class='control-label'&gt; Button Type &lt;/label&gt;
+&lt;select class=&quot;field&quot; data-type=&quot;select&quot; style='min-height: 200px' id='button2type'&gt;
+
+  &lt;option value=&quot;btn-default&quot;  &gt;Default&lt;/option&gt;
+
+  &lt;option value=&quot;btn-primary&quot;  &gt;Primary&lt;/option&gt;
+
+  &lt;option value=&quot;btn-info&quot;  &gt;Info&lt;/option&gt;
+
+  &lt;option value=&quot;btn-success&quot;  &gt;Success&lt;/option&gt;
+
+  &lt;option value=&quot;btn-warning&quot;  &gt;Warning&lt;/option&gt;
+
+  &lt;option value=&quot;btn-danger&quot;  selected  &gt;Danger&lt;/option&gt;
+
+  &lt;option value=&quot;btn-inverse&quot;  &gt;Inverse&lt;/option&gt;
+
+&lt;/select&gt;
+
+    &lt;hr/&gt;
+    &lt;button id=&quot;save&quot; class='btn btn-info'&gt;Save&lt;/button&gt;&lt;button id=&quot;cancel&quot; class='btn btn-danger'&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+" data-title="Double Button" data-trigger="manual" data-html="true"><!-- Button (Double) -->
+<label class="control-label"></label>
+<div class="controls">
+  <button class="btn btn-success" id="flightSearchBtn">Search</button>
+</div>
+</div></fieldset>
+</div>
+
+
+<!-- Preferences html -->
+</div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; David Lluncor 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+    <!-- Le mine -->
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="proj/easydo/js/controller.js"></script>
+    <script src="proj/easydo/js/gooru.js"></script>
+  </body>
+</html>
+

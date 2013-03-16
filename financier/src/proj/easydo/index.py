@@ -1,21 +1,35 @@
 """
-End points for health applications.
+End points for easydo applications.
 """
 
+import pdb
 # Self defined modules.
 
 # Generic modules.
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
+import logging
+
 import os
 from django.utils import simplejson
+
+class Constants(object):
+  DEFAULT_SOURCE = 'http://www.cleartrip.com/api/docs/air-api/schemas/search-result.xml'
+
+class FlightContacter(object):
+  
+  def __init__(self, xml_source = Constants.DEFAULT_SOURCE):
+    self.xml_source = xml_source
+    pass
 
 ## JSON endpoints.
 class TriggerEndPoint(webapp.RequestHandler):
   def get(self):
    d = {}
-   query = self.request.get('query')
+   for key in self.request.GET:
+     d[key] = str(self.request.GET[key])
+   #pdb.set_trace()
    results = []
    d['results'] = results
    json = simplejson.dumps(d)
@@ -29,7 +43,7 @@ class PreferencesMainPage(webapp.RequestHandler):
     values['entries'] = ['Find online resources for any topic.']
     popular_queries = ['cells', 'chinese', 'computers']
     values['popular_queries'] = popular_queries
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'easydo_pref_home.html')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'easydo_pref_home2.html')
     self.response.out.write(template.render(path, values))
 
 def GetEndpoints():

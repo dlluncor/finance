@@ -67,7 +67,7 @@ class Contacter(object):
   def Post(self, url, data='needed data'):
     req = urllib2.Request(url=url, data=data)
     f = urllib2.urlopen(req)
-    return str(f.read()) 
+    return str(f.read())
 
 
 def GetResults(query):
