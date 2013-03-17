@@ -3,6 +3,7 @@ gooru.resultElId = 'searchGooruResults';
 
 gooru.renderResults_ = function(response) {
   print(response);
+  $('#myDialog').dialog();
   /*
   $('#' + gooru.resultElId).html('');
   var el = $('#' + gooru.resultElId);

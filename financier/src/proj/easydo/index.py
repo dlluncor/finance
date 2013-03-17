@@ -7,6 +7,7 @@ import pdb
 import easydoer
 
 # Generic modules.
+from google.appengine.api import mail
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
@@ -18,6 +19,12 @@ from django.utils import simplejson
 
 class Constants(object):
   DEFAULT_SOURCE = 'http://www.cleartrip.com/api/docs/air-api/schemas/search-result.xml'
+
+def SendEmail(subject, body):
+  mail.send_mail(sender="David Lluncor <david.lluncor@gmail.com>",
+                 to="<h.chitalia007@gmail.com>, <david.lluncor@gmail.com>",
+                 subject=subject,
+                 body=body)
 
 class FlightContacter(object):
   
@@ -114,6 +121,19 @@ class DoActionEndPoint(webapp.RequestHandler):
 
   def post(self):
     logging.info('hello you called my POST POST POST function')
+    city_name = 'SFO'
+    subject = 'You got a great flight to %s!' % (city_name)
+    body = """Here is the confirmation for booking your trip.
+
+    For purchasing the flight, hotel, and car rental, here is your Mastercard
+    confirmation number: %s.
+
+      Enjoy the $228.23 dollars in savings!
+ 
+      The Almond Team
+    """ % ('30492S')
+    SendEmail(subject, body)
+    logging.info('Just sent you an email buddy!')
 
 ## HTML pages.
 class PreferencesMainPage(webapp.RequestHandler):
