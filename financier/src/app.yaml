@@ -23,6 +23,9 @@ handlers:
 - url: /proj/games/bubblepop
   static_dir: proj/games/bubblepop
 
+- url: /proj/stats/js
+  static_dir: proj/stats/js
+
 - url: /proj/easydo/js
   static_dir: proj/easydo/js
 
