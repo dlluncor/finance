@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="ttable.js"></script>
+    <script src="ftable.js"></script>
+    <script src="chisquaretable.js"></script>
+    <script src="barchart.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="barchart.css">
+    <!-- Logic. -->
+    <script src="stats.js" type="text/javascript"></script>
+    <script src="multi_group_stats.js" type="text/javascript"></script>
+    <script src="pearson_stats.js" type="text/javascript"></script>
+    <!-- Delegates between different stat engines. -->
+    <script src="controller.js" type="text/javascript"></script>
+  </head>
+  <ul class="tabs">
+    <li><a href="#SingleDistributionTab">Single group (T-stat)</a></li>
+    <li><a href="#MultipleDistributionTab">Multiple groups (F-stat)</a></li>
+    <li><a href="#DistributionTab">Distribution (Chi-squared)</a></li>
+  </ul>
+  <div id="SingleDistributionTab">
+    <div>
+      <span>Distribution:</span> <input type="text" id="distrib" value="">
+      <span>Trials:</span><input type="text" id="trials" value="10000">
+      <span>Samples (n):</span><input type="text" id="samples" value="10">
+      <input type="button" id="runTrial" value="Run" onclick="oneDistribCtrl.runStats();">
+    </div>
+    <div id="canvas">
+    </div>
+  </div>
+  <div id="MultipleDistributionTab">
+    <div>Instructions: Rows correspond to groups. 4 columns means there are 4 samples per group.</div>
+    <textarea class="multi-distrib-csv" id="multi-distrib-csv">
+3,2,1
+5,3,4
+5,6,7
+    </textarea>
+    <input type="button" id="runMultiAnalysis" value="Run" onclick="multihelper.runStats();">
+    <div id="multi-results" class="multi-results">
+    </div>
+  </div>
+  <div id="DistributionTab">
+    <div>Pearson's Chi Square Test</div>
+    <div>Restaurant owner tells me what % of his customers come on certain days.</div>
+    <div>Instructions: First line is "Expected distribution". Second line is "observed distribution".</div>
+    <textarea class="multi-distrib-csv" id="pearson-chi-csv">
+20,20,30,40,60,30
+30,14,34,45,57,20
+    </textarea>
+    <input type="button" id="runPearsonChiAnalysis" value="Run" onclick="pearsonhelper.runStats();">
+    <div id="pearson-chi-results" class="pearson-chi-results">
+    </div> 
+  </div>
+</html>
