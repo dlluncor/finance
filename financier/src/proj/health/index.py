@@ -15,7 +15,10 @@ from django.utils import simplejson
 class HealthMainPage(webapp.RequestHandler):
   def get(self):
     values = {}
-    values['entries'] = simplejson.dumps(medlineplus.Ask())
+    try:
+      values['entries'] = simplejson.dumps(medlineplus.Ask())
+    except:
+      values['entries'] = simplejson.dumps(['No results!'])
     path = os.path.join(os.path.dirname(__file__), 'templates', 'health_home.html')
     self.response.out.write(template.render(path, values))
 

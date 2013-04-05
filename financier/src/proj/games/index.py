@@ -1,5 +1,5 @@
 """
-End points for health applications.
+End points for game applications.
 """
 
 # Generic modules.
