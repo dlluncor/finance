@@ -53,6 +53,7 @@ function subscribeToStreams(streams) {
 }
 
 todoc.init_ = function() {
+  window.location.hash = '#start';
   avs.init();
 
   todoc.apiKey = '100';
@@ -99,7 +100,7 @@ todoc.handleButton = function() {
   }
 
   else if (selectVal == 'Snap photo!') {
-    todoc2.getImages();
+    window.location.hash = '#page1';
   }
 };
 
@@ -204,9 +205,8 @@ avs.init = function() {
       apiVersion: 2,
       onSave: function(imageID, newURL) {
         avs.featherEditor.close();
+        $('#page1').css('display', 'block');
         $("#aviaryResult").attr("src", newURL);
-        $('#allAviaryResults').removeClass();
-        $("#overlay").slideDown('fast');
         return false;
       }
   });
@@ -226,3 +226,27 @@ getParams = function() {
 };
 
 $(document).ready(todoc.init_);
+
+var hasher = {};
+
+hasher.init_ = function() {
+  var params = getParams();
+  var switcher = '';
+  if ('page0' in params || 'start' in params) {
+    $('#page0').css('display', 'block'); $('#page1').css('display', 'none'); 
+    $('#page2').css('display', 'none');
+    switcher = 'page0';
+  } else if ('page1' in params) {
+    $('#page0').css('display', 'none');
+    $('#page2').css('display', 'none');
+    switcher = 'page1';
+    todoc2.getImages();
+  } else if ('page2' in params) {
+    $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
+    $('#page2').css('display', 'block');
+    switcher = 'page2';
+  }
+  window.console.log(switcher);
+};
+
+$(window).bind('hashchange', hasher.init_);

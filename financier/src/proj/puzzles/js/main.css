@@ -38,3 +38,15 @@ video {
 .hide {
 	display: none;
 }
+
+#page0 {
+  display: block;
+}
+
+#page1 {
+display: none;
+}
+
+#page2 {
+display: none;
+}

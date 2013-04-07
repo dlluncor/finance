@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="/proj/puzzles/js/main.css"></link>
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <!--<script src="/proj/puzzles/js/imageizer.js"></script>-->
     <script src="/proj/puzzles/js/imageizer2.js"></script>
@@ -21,24 +22,52 @@
       <img href="" id="imgChange"></img>
     </div>
 
+    <!-- Nav bar.-->
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Remote Photobook</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="/">Home</a>
+              </li>
+              <li class="active">
+                <a href="/imageizer">With your family!</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="tocdoc">
+
       <div>
-        <select id="vidSelect" onclick="todoc.handleButton();">
-          <option>Gameshow enter</option>
-          <option>Angry</option>
-          <option>Feeling sad</option>
-          <option>Snap photo!</option>
-        </select>
+        <div id="page0">
+          <div>
+            <select id="vidSelect" onclick="todoc.handleButton();">
+              <option>Gameshow enter</option>
+              <option>Angry</option>
+              <option>Feeling sad</option>
+              <option>Snap photo!</option>
+            </select>
+          </div>
+
+        <div id="myPublisherDiv" class="big-video"></div>
+        <div id="videoDiv"></div>
+        <hr>
+
+        <div id="imageContainer" style="display:none;"></div>
+        <canvas id="bigCanvas" style="display:none;"></canvas>
       </div>
 
-      <div id="myPublisherDiv" class="big-video"></div>
-      <div id="videoDiv"></div>
-      <hr>
-
-      <div id="imageContainer" style="display:none;"></div>
-      <canvas id="bigCanvas" style="display:none;"></canvas>
-
-      <div id="allAviaryResults" class="hide">
+      <div id="page1">
         <div>
           <h3 id="aviaryText">Your photo is below!</h3>
           <img id="aviaryResult"></img>
@@ -48,19 +77,34 @@
         <div>
           <h3>View as <a id="saveAsStickers" href="#">stickers</a>, <a id="saveAsPictureFrames" href="#">picture frames</a>, or <a href="#" id="saveAsPosters">posters</a>.</h3>
         </div>
-
         <hr>
-        <div>
+      </div>
+
+      <div id="page2">
+         <div>
           <h3>Get ready to print!!</h3>
-          <table>
-            <tr><td>Stickers</td><td><input value="0"></td></tr>
-            <tr><td>Frames</td><td><input value="2"></td></tr>
-            <tr><td>Posters</td><td><input value="0"></td></tr>
+          <table class="table">
+            <tr><td>Stickers</td><td><input value="0" class="input-small"></td></tr>
+            <tr><td>Frames</td><td><input value="2" class="input-small"></td></tr>
+            <tr><td>Posters</td><td><input value="0" class="input-small"></td></tr>
           </table>
-          <button id="printItButton">Print it</button>
+          <button id="printItButton" class="btn btn-primary">Print at Walgreens</button>
         </div>
       </div>
 
     </div>
+    <!-- Stupid bootstrap ...-->
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
   </body>
 </html>
