@@ -29,6 +29,9 @@ handlers:
 - url: /proj/easydo/js
   static_dir: proj/easydo/js
 
+- url: /proj/puzzles/js
+  static_dir: proj/puzzles/js
+
 - url: /css
   static_dir: css
 
