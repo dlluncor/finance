@@ -50,3 +50,20 @@ display: none;
 #page2 {
 display: none;
 }
+
+#page3 {
+display: none;
+}
+
+.med-textarea {
+	width: 505px;
+	height: 60px;
+}
+
+.left-align {
+	margin-left: 10px;
+}
+
+.more-left-align {
+	margin-left: 20px;
+}

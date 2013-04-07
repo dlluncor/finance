@@ -73,12 +73,12 @@ todoc.init_ = function() {
 
 // Get the session for each user.
 todoc.getSessionId = function() {
-  return "2_MX4xMDB-flNhdCBBcHIgMDYgMTg6MDY6MTQgUERUIDIwMTN-MC43MzY3ODgyfg";
+  return "2_MX4xMDB-flNhdCBBcHIgMDYgMTg6MDc6MDAgUERUIDIwMTN-MC40MzQ0MTEwNX4";
 };
 
 // Get the token for each user.
 todoc.getToken = function() {
-  var token0 = 'T1==cGFydG5lcl9pZD0xMDAmc2lnPWU0ZjEwNGQwNzk0YWEyYWJiNDU1NzI3NDMwY2U2Y2Q4NDY0NjVlMDI6cm9sZT1wdWJsaXNoZXImc2Vzc2lvbl9pZD0yX01YNHhNREItZmxOaGRDQkJjSElnTURZZ01UZzZNRFk2TVRRZ1VFUlVJREl3TVROLU1DNDNNelkzT0RneWZnJmNyZWF0ZV90aW1lPTEzNjUyOTY3ODkmbm9uY2U9MC40ODA3MzUxMjU5NzYzNjQwMyZleHBpcmVfdGltZT0xMzY3ODgyNTE1';
+  var token0 = 'T1==cGFydG5lcl9pZD0xMDAmc2lnPTViZmIyYzJkOWY3Mjc0MDIyNmE1YWQ3MzA2Yzc4MDBmNjI2NzA1ODQ6cm9sZT1wdWJsaXNoZXImc2Vzc2lvbl9pZD0yX01YNHhNREItZmxOaGRDQkJjSElnTURZZ01UZzZNRGM2TURBZ1VFUlVJREl3TVROLU1DNDBNelEwTVRFd05YNCZjcmVhdGVfdGltZT0xMzY1Mjk2ODI4Jm5vbmNlPTAuMTQ1NDE1MjY2MTc4NjgwNCZleHBpcmVfdGltZT0xMzY3ODgyNTE1';
   return token0;
 };
 
@@ -198,15 +198,23 @@ var avs = {
 
 avs.init = function() {
   var aviaryKey = 'z6LRPsnz2U-AkufrCO2WXg';
-
+  var isSaved = false;
   // Initialize Aviary's Feather editor
   avs.featherEditor = new Aviary.Feather({
     apiKey: aviaryKey,
       apiVersion: 2,
       onSave: function(imageID, newURL) {
+        isSaved = true;
         avs.featherEditor.close();
         $('#page1').css('display', 'block');
         $("#aviaryResult").attr("src", newURL);
+        $("#aviaryResult2").attr("href", newURL);
+        return false;
+      },
+      onClose: function(isDirty) {
+        if (isDirty && !isSaved) {
+          window.location.hash = '#page0';
+        }
         return false;
       }
   });
@@ -234,17 +242,21 @@ hasher.init_ = function() {
   var switcher = '';
   if ('page0' in params || 'start' in params) {
     $('#page0').css('display', 'block'); $('#page1').css('display', 'none'); 
-    $('#page2').css('display', 'none');
+    $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
     switcher = 'page0';
   } else if ('page1' in params) {
-    $('#page0').css('display', 'none');
-    $('#page2').css('display', 'none');
+    $('#page0').css('display', 'none'); 
+    $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
     switcher = 'page1';
     todoc2.getImages();
   } else if ('page2' in params) {
     $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
-    $('#page2').css('display', 'block');
+    $('#page2').css('display', 'block'); $('#page3').css('display', 'none'); 
     switcher = 'page2';
+  } else if ('page3' in params) {
+    $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
+    $('#page2').css('display', 'none'); $('#page3').css('display', 'block'); 
+    switcher = 'page3';
   }
   window.console.log(switcher);
 };

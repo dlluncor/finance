@@ -49,7 +49,7 @@
     <div id="tocdoc">
 
       <div>
-        <div id="page0">
+        <div id="page0" class="left-align">
           <div>
             <select id="vidSelect" onclick="todoc.handleButton();">
               <option>Gameshow enter</option>
@@ -67,7 +67,7 @@
         <canvas id="bigCanvas" style="display:none;"></canvas>
       </div>
 
-      <div id="page1">
+      <div id="page1" class="left-align">
         <div>
           <h3 id="aviaryText">Your photo is below!</h3>
           <img id="aviaryResult"></img>
@@ -75,13 +75,17 @@
         <hr>
 
         <div>
-          <h3>View as <a id="saveAsStickers" href="#">stickers</a>, <a id="saveAsPictureFrames" href="#">picture frames</a>, or <a href="#" id="saveAsPosters">posters</a>.</h3>
+          <h3>Preview as <a id="saveAsStickers" href="#">stickers</a>, <a id="saveAsPictureFrames" href="#">picture frames</a>, or <a href="#" id="saveAsPosters">posters</a>.</h3>
+          <button onclick="window.location.href='#page0';" class="btn btn-info">Back</button> 
+          <button id="continueToPurchaseBtn" class="btn btn-success" style="margin-left:415px;">Continue</button>
         </div>
         <hr>
       </div>
 
-      <div id="page2">
+      <div id="page2" class="left-align">
          <div>
+          <h3>Review</h3>
+          <div class="more-left-align"><a id="aviaryResult2" target="_blank">Link to your family photo.</a></div>
           <h3>Get ready to print!!</h3>
           <table class="table">
             <tr><td>Stickers</td><td><input value="0" class="input-small"></td></tr>
@@ -89,7 +93,16 @@
             <tr><td>Posters</td><td><input value="0" class="input-small"></td></tr>
           </table>
           <button id="printItButton" class="btn btn-primary">Print at Walgreens</button>
+          <div><h3><b>or</b></h3></div>
+          <h3>Send a message:</h3>
+          <div><textarea class="med-textarea">Love you mom! See you at Christmas!</textarea></div>
+          <button id="postcardButton" class="btn btn-success">Send a postcard</button>
         </div>
+      </div>
+
+      <div id="page3" class="left-align">
+        <h3><b>Thank you for your order! We'll get right on it.</b></h3>
+        <div><img src="http://www.sitcomsonline.com/photos/10040550.jpg"></div>
       </div>
 
     </div>
