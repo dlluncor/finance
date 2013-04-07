@@ -21,12 +21,12 @@ gizer.addClickHandlers = function() {
   });
 
   $('#saveAsPictureFrames').click(function(e) {
-  	var newUrl = gizer.makeSaveImage(1);
+  	var newUrl = gizer.makeSaveImage(0.6);
   	window.open(newUrl, '_blank');
   });
 
   $('#saveAsPosters').click(function(e) {
-  	var newUrl = gizer.makeSaveImage(3);
+  	var newUrl = gizer.makeSaveImage(1);
   	window.open(newUrl, '_blank');
   });
 

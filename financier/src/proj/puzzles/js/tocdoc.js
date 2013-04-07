@@ -124,6 +124,7 @@ todoc2.appendImage = function(streamer) {
   img.onload = function() {
     todoc2.totalWidth += this.width;
     this.originalWidth = this.width;
+    todoc2.originalWidth = this.width;
     if (this.height > todoc2.maxHeight) {
       todoc2.maxHeight = this.height;
     }
@@ -139,7 +140,15 @@ todoc2.getImages = function() {
   todoc2.maxHeight = 0;
   var canvas = document.getElementById("bigCanvas");
 
+  var numOthers = todoc.subscribers.length;
+
+  // We can do funny things here based on how many subscribers there are.
+  var fillMeIn = numOthers == 0 ? 9 : 1;
   // Populate array of images.
+  for (var i = 0; i < fillMeIn; i++) {
+    todoc2.appendImage(todoc.publisher);
+  }
+  
   for (var i = 0; i < todoc.subscribers.length; i++) {
     var streamer = todoc.subscribers[i];
     if (!streamer) {
@@ -147,23 +156,36 @@ todoc2.getImages = function() {
     }
     todoc2.appendImage(streamer);
   }
-  todoc2.appendImage(todoc.publisher);
 
   // Stitch images together and retrieve a base64 image.
   // Wait one cycle for the data to be rendered to the dom
   var makeAnImage = function() {
-    canvas.width = todoc2.totalWidth;
-    canvas.height = todoc2.maxHeight;
     var ctx = canvas.getContext('2d');
     var startX = 0;
     var startY = 0;
     var images = $("#imageContainer img");
+    // Calculate number of blocks.
+    var numVerticalBlocks = 1;
     for (var i = 0; i < images.length; i++) {
-      ctx.drawImage(images[i], startX, 0); // y's are all the same.
-      startX += images[i].originalWidth;
-      startY += images[i].originalHeight;
+      if (i != 0 && i % 3 == 0) {
+        numVerticalBlocks += 1;
+      }
     }
-    
+    var numHorizBlocks = images.length > 2 ? 3 : images.length;
+    canvas.width = numHorizBlocks * todoc2.originalWidth;
+    canvas.height = numVerticalBlocks * todoc2.maxHeight;
+
+    // Fill in the image.
+    for (var i = 0; i < images.length; i++) {
+      if (i != 0 && i % 3 == 0) {
+        // Every third image go down in height.
+        startY += todoc2.maxHeight;
+        startX = 0; // Start back at the beginning of the horizontal block.
+      }
+      ctx.drawImage(images[i], startX, startY); // y's are all the same.
+      startX += images[i].originalWidth;
+    }
+
     var base64Data = canvas.toDataURL('image/png');
     var resultImage = $('<img />', {id: 'resultImageId'});
     resultImage.attr({src:base64Data, height:240});
