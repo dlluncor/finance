@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="/proj/puzzles/js/main.css"></link>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <!--<script src="/proj/puzzles/js/imageizer.js"></script>-->
-
+    <script src="/proj/puzzles/js/imageizer2.js"></script>
     <!-- TOC Doc. -->
     <script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
     <script src="http://feather.aviary.com/js/feather.js" type="text/javascript"></script>
@@ -31,16 +31,36 @@
         </select>
       </div>
 
-      <div id="myPublisherDiv"></div>
+      <div id="myPublisherDiv" class="big-video"></div>
       <div id="videoDiv"></div>
       <hr>
 
       <div id="imageContainer" style="display:none;"></div>
       <canvas id="bigCanvas" style="display:none;"></canvas>
-      <div>
-        <h3 id="aviaryText" class="hide">Your photo is below!</h3>
-        <img id="aviaryResult"></img>
+
+      <div id="allAviaryResults" class="hide">
+        <div>
+          <h3 id="aviaryText">Your photo is below!</h3>
+          <img id="aviaryResult"></img>
+        </div>
+        <hr>
+
+        <div>
+          <h3>View as <a id="saveAsStickers" href="#">stickers</a>, <a id="saveAsPictureFrames" href="#">picture frames</a>, or <a href="#" id="saveAsPosters">posters</a>.</h3>
+        </div>
+
+        <hr>
+        <div>
+          <h3>Get ready to print!!</h3>
+          <table>
+            <tr><td>Stickers</td><td><input value="0"></td></tr>
+            <tr><td>Frames</td><td><input value="2"></td></tr>
+            <tr><td>Posters</td><td><input value="0"></td></tr>
+          </table>
+          <button id="printItButton">Print it</button>
+        </div>
       </div>
+
     </div>
   </body>
 </html>

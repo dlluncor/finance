@@ -45,6 +45,7 @@ function subscribeToStreams(streams) {
     div.setAttribute('id', 'stream' + streams[i].streamId);
     $('#videoDiv').append(div);
     $(div).css('display', 'inline-block');
+    $(div).addClass('big-video');
 
     // Subscribe to the stream
     todoc.subscribers.push(todoc.session.subscribe(streams[i], div.id));
@@ -204,7 +205,7 @@ avs.init = function() {
       onSave: function(imageID, newURL) {
         avs.featherEditor.close();
         $("#aviaryResult").attr("src", newURL);
-        $('#aviaryText').removeClass();
+        $('#allAviaryResults').removeClass();
         $("#overlay").slideDown('fast');
         return false;
       }
