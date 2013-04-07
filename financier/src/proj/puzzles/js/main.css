@@ -1,0 +1,33 @@
+.vid-angry {
+  -webkit-filter: saturate(350%);
+}
+
+.vid-entry {
+  -webkit-transition-duration: 4s;	
+  -webkit-transform: rotateY(180deg) !important;
+}
+
+.vid-sick {
+  -webkit-filter: hue-rotate(180deg);
+}
+
+/* Make transforms look cool. */
+video {
+   -webkit-transition-property: -webkit-transform;
+}
+
+.no-duration {
+   -webkit-transition-duration: 0s;
+}
+
+#myPublisherDiv {
+  display: inline-block;
+}
+
+#videoDiv {
+  display: inline-block;
+}
+
+.hide {
+	display: none;
+}
