@@ -82,11 +82,42 @@ var Block = function(n) {
   this.el.css('width', this.width + 'px');
 };
 
-hctrl.init_ = function() {
-  var hanoi = new Hanoi(10);
+hctrl.setClickHandlers = function() {
+ var runHanoi = function() {
+    var numPegs = parseInt($('#numPegsInput').val());
+    hctrl.clearPreviousRun();
+    hctrl.runHanoi(numPegs);
+ };
+
+ $('#numPegsInput').keypress(function(event) {
+    if (event.which == 13) {
+      runHanoi();
+    }
+ });
+
+ $('#runHanoiButton').click(function() {
+    runHanoi();
+ });
+};
+
+hctrl.clearPreviousRun = function() {
+  $('#col0').html('<br>');
+  $('#col1').html('<br>');
+  $('#col2').html('<br>');
+  $('#results').html('');
+};
+
+hctrl.runHanoi = function(numPegs) {
+  var hanoi = new Hanoi(numPegs);
   hanoi.solve();
   var rRes = hanoi.answers_.map(function(el) { return '<div>' + el + '</div>'}); 
   print(rRes);
+};
+
+hctrl.init_ = function() {
+  hctrl.setClickHandlers();
+  var numPegs = parseInt($('#numPegsInput').val());
+  hctrl.runHanoi(numPegs);
 };
 
 $(document).ready(hctrl.init_);
