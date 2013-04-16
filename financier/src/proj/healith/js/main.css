@@ -1,0 +1,94 @@
+.vid-angry {
+  -webkit-filter: saturate(350%);
+}
+
+.vid-entry {
+  -webkit-transition-duration: 4s;	
+  -webkit-transform: rotateY(180deg) !important;
+}
+
+.vid-sick {
+  -webkit-filter: hue-rotate(180deg);
+}
+
+/* Make transforms look cool. */
+video {
+   -webkit-transition-property: -webkit-transform;
+   width: 455px !important;
+   height: 340px !important;
+}
+
+.no-duration {
+   -webkit-transition-duration: 0s;
+}
+
+#myPublisherDiv {
+  display: inline-block;
+}
+
+#videoDiv {
+  display: inline-block;
+}
+
+.big-video {
+  width: 455px !important;
+  height: 340px !important;
+}
+
+.hide {
+	display: none;
+}
+
+#page0 {
+  display: block;
+}
+
+#page1 {
+display: none;
+}
+
+#page2 {
+display: none;
+}
+
+#page3 {
+display: none;
+}
+
+.med-textarea {
+	width: 505px;
+	height: 60px;
+}
+
+.left-align {
+	margin-left: 10px;
+}
+
+.more-left-align {
+	margin-left: 20px;
+}
+
+/* CSS specifically for healith. */
+.big-letters {
+  color: Navy;
+  font-size: 160%;
+}
+
+#page0 td {
+  padding: 100px;
+}
+
+#page0 .patient-notification {
+  background-color: cyan;
+  font-weight: bold;
+  padding: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+}
+
+.plus-icon {
+  color: red;
+  font-weight: bold;
+  font-size: 500%;
+}
