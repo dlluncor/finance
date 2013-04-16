@@ -32,6 +32,9 @@ handlers:
 - url: /proj/puzzles/js
   static_dir: proj/puzzles/js
 
+- url: /proj/healith/js
+  static_dir: proj/healith/js
+
 - url: /css
   static_dir: css
 

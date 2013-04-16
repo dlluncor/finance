@@ -20,6 +20,7 @@ from proj.games import index as games_index
 from proj.easydo import index as easydo_index
 from proj.stats import index as stats_index
 from proj.puzzles import index as puzzles_index
+from proj.healith import index as healith_index
 
 from simulator import assets
 from analysis import question1
@@ -95,9 +96,10 @@ def main():
   easydo_endpoints = easydo_index.GetEndpoints()
   stats_endpoints = stats_index.GetEndpoints()
   puzzles_endpoints = puzzles_index.GetEndpoints()
+  healith_endpoints = healith_index.GetEndpoints()
   endpoints = (finance_endpoints + health_endpoints + education_endpoints +
       reading_endpoints + games_endpoints + easydo_endpoints + stats_endpoints +
-      puzzles_endpoints)
+      puzzles_endpoints + healith_endpoints)
   application = webapp.WSGIApplication(endpoints, debug=True)
   run_wsgi_app(application)
 
