@@ -40,7 +40,7 @@ video {
 }
 
 #page0 {
-  display: block;
+  display: none;
 }
 
 #page1 {
@@ -48,7 +48,7 @@ display: none;
 }
 
 #page2 {
-display: none;
+display: block;
 }
 
 #page3 {
@@ -69,6 +69,8 @@ display: none;
 }
 
 /* CSS specifically for healith. */
+
+/* Page 0. */
 .big-letters {
   color: Navy;
   font-size: 160%;
@@ -91,4 +93,57 @@ display: none;
   color: red;
   font-weight: bold;
   font-size: 500%;
+  cursor: pointer;
+}
+
+/* Page 1. */
+#page1-table img {
+  height: 200px;
+  width: 200px;
+}
+
+.tile {
+  display-inline: block;
+  border: 3px solid lightblue;
+  border-radius: 8px;
+}
+
+/* Page 2. */
+.x-icon {
+  color: red;
+  font-weight: bold;
+  font-size: 200%;
+  cursor: pointer;
+}
+
+#page2-template-table {
+  text-align: center !important;
+}
+
+.green-check:after {
+  content: "✓";
+  font-weight: bold;
+  color: lawngreen;
+  font-size: 200%;
+}
+
+.content-col {
+  border-right: 1px solid lightblue;
+  border-bottom: 1px solid lightblue;
+  border-top: 1px solid lightblue;
+}
+
+#send-template-card {
+  border: 3px solid lightblue;
+  padding: 10px;
+  margin-left: 100px;
+  vertical-align: top;
+}
+
+.blue-plus:after {
+  color: blue;
+  font-weight: bold;
+  font-size: 200%;
+  cursor: pointer;
+  content: "+";
 }
