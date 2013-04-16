@@ -1,13 +1,13 @@
 <html>
   <head>
-    <link rel="stylesheet" href="/proj/puzzles/js/main.css"></link>
+    <link rel="stylesheet" href="/proj/healith/js/main.css"></link>
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script src="/proj/puzzles/js/imageizer2.js"></script>
-    <!-- TOC Doc. -->
+    <!--<script src="/proj/puzzles/js/imageizer2.js"></script>
+     TOC Doc. 
     <script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
     <script src="http://feather.aviary.com/js/feather.js" type="text/javascript"></script>
-    <script src="/proj/puzzles/js/tocdoc.js"></script>
+    <script src="/proj/puzzles/js/tocdoc.js"></script> -->
     <style>
       .peg {
         display: inline-block;
@@ -30,14 +30,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="./index.html">Remote Photobook</a>
+          <a class="brand" href="/healith">Healith</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="">
-                <a href="/">Home</a>
-              </li>
               <li class="active">
-                <a href="/imageizer">With your family!</a>
+                <a href="/healith">Home</a>
+              </li>
+              <li>
+                <a href="/imageizer">Patients</a>
               </li>
             </ul>
           </div>
@@ -47,23 +47,11 @@
 
     <div id="tocdoc">
 
-      <div>
-        <div id="page0" class="left-align">
-          <div>
-            <select id="vidSelect" onclick="todoc.handleButton();">
-              <option>Gameshow enter</option>
-              <option>Angry</option>
-              <option>Feeling sad</option>
-              <option>Snap photo!</option>
-            </select>
-          </div>
-
-        <div id="myPublisherDiv" class="big-video"></div>
-        <div id="videoDiv"></div>
-        <hr>
-
-        <div id="imageContainer" style="display:none;"></div>
-        <canvas id="bigCanvas" style="display:none;"></canvas>
+      <div id="page0" class="left-align">
+        <table class="table">
+          <tr><td class="big-letters">Current Patients</td><td><span class="patient-notification">1</span></td></tr>
+          <tr><td class="big-letters">New patient</td><td class="plus-icon">+</td></tr>
+        </table>
       </div>
 
       <div id="page1" class="left-align">
