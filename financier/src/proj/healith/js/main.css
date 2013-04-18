@@ -148,3 +148,11 @@ display: none;
   cursor: pointer;
   content: "+";
 }
+
+.right-arrow:after {
+  color: orange;
+  font-weight: bold;
+  font-size: 180%;
+  cursor: pointer;
+  content: "→";
+}

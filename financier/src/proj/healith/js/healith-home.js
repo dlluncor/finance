@@ -29,12 +29,30 @@ dochome.init_ = function() {
   dochome.setHandlers();
 };
 
-doctemplate = {};
+doctemplate = {
+  contentObjs: null
+};
+
+doctemplate.setItemSelectHandlers = function() {
+  var itemToContentObj = {};
+
+  var itemClicked = function(e) {
+    window.console.log(e);
+    var idClicked = e.srcElement.id;
+    window.console.log(itemToContentObj[idClicked]);
+    // TODO(dlluncor): send text message when arrow clicked.
+  };
+
+  doctemplate.contentObjs.forEach(function(contentObj) {
+    $('#' + contentObj.item).click(itemClicked);
+    itemToContentObj[contentObj.item] = contentObj;
+  });
+};
 
 doctemplate.setUp = function(templateType) {
   var contentObjs = [
-    { day: 'Day 0:', time: '2:00pm', content: 'Surgery Demo Video', check: 'check'},
-    { day: 'Day 1:', time: '10:00am', content: 'Tips on Driving Back', check: ''},
+    { day: 'Day 0:', time: '2:00pm', content: 'Surgery Demo Video', check: 'green'},
+    { day: 'Day 1:', time: '10:00am', content: 'Tips on Driving Back', check: 'orange'},
     { day: 'Day 2:', time: '8:00am', content: 'How to Shower', check: ''},
     { day: 'Day 8:', time: '8:00am', content: 'Remove Stuture Covering', check: ''},
     { day: 'Days 9:', time: 'nopush', content: 'Follow up Checklist', check: ''},
@@ -44,9 +62,19 @@ doctemplate.setUp = function(templateType) {
     { day: 'Day 36:', time: '8:00am', content: 'Positive Encouragement', check: ''},
     { day: 'Day 40:', time: '8:00am', content: 'Recovery!!!/ Report sheet', check: ''},
   ];
+  var i = 0;
+  contentObjs.forEach(function(contentObj) {
+    contentObj.item = 'selectitem' + i;
+    i++;
+  });
+  doctemplate.contentObjs = contentObjs;
   var templateRowsTmpl = $('#templateRow').template();
   var table = $('#page2-template-table');
   $.tmpl(templateRowsTmpl, contentObjs).appendTo(table);
+
+  window.setTimeout(function() {
+    doctemplate.setItemSelectHandlers();
+  }, 2);
 }
 
 var docctrl = {};
