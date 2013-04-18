@@ -17,8 +17,15 @@ class HealithDocMainPage(webapp.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), '', 'healith_home.html')
     self.response.out.write(template.render(path, values))
 
+class HealithPatientMobilePage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), '', 'patient_mobile_app.html')
+    self.response.out.write(template.render(path, values))
+
 def GetEndpoints():
   endpoints = [
     ('/healith', HealithDocMainPage),
+    ('/patientmobile', HealithPatientMobilePage)
   ]
   return endpoints

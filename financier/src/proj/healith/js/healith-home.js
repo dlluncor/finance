@@ -15,6 +15,8 @@ getParams = function() {
 
 var dochome = {};
 
+dochome.absoluteUrl = 'http://teacherlunk.appspot.com';
+
 dochome.setHandlers = function() {
   $('#page0-plus-icon').click(function(e) {
     window.location.hash = '#page1';
@@ -35,37 +37,78 @@ doctemplate = {
 
 doctemplate.setItemSelectHandlers = function() {
   var itemToContentObj = {};
-
+  var responseIdToContentObj = {};
   var itemClicked = function(e) {
     window.console.log(e);
-    var idClicked = e.srcElement.id;
-    window.console.log(itemToContentObj[idClicked]);
+    var el = e.srcElement;
+    var contentObj = itemToContentObj[el.id];
+    window.console.log(contentObj);
+    $(el).removeClass('right-arrow');
+    $(el).addClass('green-check');
     // TODO(dlluncor): send text message when arrow clicked.
+    window.console.log(contentObj.message);
+  };
+
+  var responseHoveredIn = function(e) {
+    var el = e.srcElement;
+    var contentObj = responseIdToContentObj[el.id];
+    if (contentObj.responseImage == '') {
+      return;
+    }
+    $(el).find('.response-image').css('display', 'block');
+    window.console.log($(el));
+  };
+
+  var responseHoveredOut = function(e) {
+    var el = e.srcElement;
+    var contentObj = responseIdToContentObj[el.id];
+    if (contentObj.responseImage == '') {
+      return;
+    }
+    $(el).find('.response-image').css('display', 'none');
+    window.console.log($(el));
   };
 
   doctemplate.contentObjs.forEach(function(contentObj) {
+    // To send a message.
     $('#' + contentObj.item).click(itemClicked);
     itemToContentObj[contentObj.item] = contentObj;
+    responseIdToContentObj[contentObj.responseId] = contentObj;
+    // To show what a user responded with.
+    $('#' + contentObj.responseId).hover(responseHoveredIn, responseHoveredOut);
   });
 };
 
 doctemplate.setUp = function(templateType) {
+  var heartSurgeryPdf = dochome.absoluteUrl + '/img/healith//HeartSurgeryPDF.pdf';
   var contentObjs = [
-    { day: 'Day 0:', time: '2:00pm', content: 'Surgery Demo Video', check: 'green'},
-    { day: 'Day 1:', time: '10:00am', content: 'Tips on Driving Back', check: 'orange'},
+    { day: 'Day 0:', time: '2:00pm', content: 'Surgery Demo Video', check: 'orange',
+      message: 'Please check out this heart surgery video. http://www.youtube.com/watch?v=ymVNmmHc-BQ'},
+    { day: 'Day 1:', time: '10:00am', content: 'Tips on Driving Back', check: ''},
     { day: 'Day 2:', time: '8:00am', content: 'How to Shower', check: ''},
-    { day: 'Day 8:', time: '8:00am', content: 'Remove Stuture Covering', check: ''},
-    { day: 'Days 9:', time: 'nopush', content: 'Follow up Checklist', check: ''},
+    { day: 'Day 8:', time: '8:00am', content: 'Remove Stuture Covering', check: 'orange',
+      message: 'This document might help explain how to remove stutures. ' + heartSurgeryPdf},
+    { day: 'Day 9:', time: 'nopush', content: 'Follow up Checklist', check: ''},
     { day: 'Day 20:', time: '2:00pm', content: 'Summary/ Road to Recovery', check: ''},
-    { day: 'Day 30:', time: '8:00am', content: 'Scab Present?', check: ''},
-    { day: 'Day 35:', time: '9:00pm', content: 'Picture Follow Up', check: ''},
+    { day: 'Day 30:', time: '8:00am', content: 'Scab Present?', check: 'orange',
+      message: 'Do you still have a scab present over the surgery? (Yes/no?)',
+      response: 'Yes', responseImage: '/img/healith/mychestscab.jpe'},
+    { day: 'Day 35:', time: '9:00pm', content: 'Picture Follow Up', check: 'orange',
+      message: 'Could you send me a picture of how the scab is healing?'},
     { day: 'Day 36:', time: '8:00am', content: 'Positive Encouragement', check: ''},
     { day: 'Day 40:', time: '8:00am', content: 'Recovery!!!/ Report sheet', check: ''},
   ];
   var i = 0;
   contentObjs.forEach(function(contentObj) {
     contentObj.item = 'selectitem' + i;
+    contentObj.responseId = 'response' + i;
     i++;
+    var opKeys = ['response', 'responseImage'];
+    opKeys.forEach(function(key) {
+      if ((key in contentObj) == false) {
+        contentObj[key] = '';
+      }
+    });
   });
   doctemplate.contentObjs = contentObjs;
   var templateRowsTmpl = $('#templateRow').template();

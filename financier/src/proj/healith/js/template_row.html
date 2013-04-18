@@ -1,11 +1,22 @@
 <tr>
-  <td class="x-icon">x</td>
-  <td><div class="btn btn-info" style="width:50px;"><div>${day}</div><span>${time}</span></div></td>
+  <td class="x-icon"></td>
+  <!--  btn btn-info -->
+  <td><div class="" style="width:70px;"><div>${day}</div><span>${time}</span></div></td>
   <td class="content-col">${content}</td>
+
   {{if check == 'green'}}
     <td class="green-check"></td>
   {{/if}}
   {{if check == 'orange'}}
     <td class="right-arrow" id=${item}></td>
   {{/if}}
+  {{if check == ''}}
+    <td></td>
+  {{/if}}
+
+  <td style="cursor:pointer; position:relative;" id=${responseId}>${response}
+  	{{if responseImage != ''}}
+      <div class="response-image" style='display:none;'><img src=${responseImage}></img></div>
+    {{/if}}
+  </td>
 </tr>
