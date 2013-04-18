@@ -123,6 +123,7 @@ doctemplate.setUp = function(templateType) {
 var docctrl = {};
 
 docctrl.init_ = function() {
+  window.location.hash = '#page0';
   dochome.init_();
   docctrl.insertTemplates_();
 }
