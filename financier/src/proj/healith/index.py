@@ -3,8 +3,7 @@ End points for healith applicatoins.
 """
 
 # Self defined modules.
-import helper_twil
-import twilio
+#import helper_twil
 
 # Generic modules.
 from google.appengine.ext import webapp
