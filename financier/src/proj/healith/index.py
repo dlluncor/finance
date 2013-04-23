@@ -3,6 +3,8 @@ End points for healith applicatoins.
 """
 
 # Self defined modules.
+import helper_twil
+import twilio
 
 # Generic modules.
 from google.appengine.ext import webapp
@@ -23,9 +25,16 @@ class HealithPatientMobilePage(webapp.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), '', 'patient_mobile_app.html')
     self.response.out.write(template.render(path, values))
 
+class SendMessageTwilio(webapp.RequestHandler):
+  def get(self):
+    self.response.write("The twilio version is " + twilio.__version__)
+    #text = helper_twil.SendMessage('hi david', '3109876896')
+    #self.response.out.write(text)
+
 def GetEndpoints():
   endpoints = [
     ('/healith', HealithDocMainPage),
-    ('/patientmobile', HealithPatientMobilePage)
+    ('/patientmobile', HealithPatientMobilePage),
+    ('/sendmessage', SendMessageTwilio)
   ]
   return endpoints
