@@ -69,6 +69,12 @@ doctemplate.setItemSelectHandlers = function() {
     window.console.log($(el));
   };
 
+  var removeItemClicked = function(e) {
+    var el = e.srcElement;
+    var myEl = $(el);
+    myEl.parent().css('display', 'none');
+  }
+
   doctemplate.contentObjs.forEach(function(contentObj) {
     // To send a message.
     $('#' + contentObj.item).click(itemClicked);
@@ -76,6 +82,8 @@ doctemplate.setItemSelectHandlers = function() {
     responseIdToContentObj[contentObj.responseId] = contentObj;
     // To show what a user responded with.
     $('#' + contentObj.responseId).hover(responseHoveredIn, responseHoveredOut);
+    // To remove an item when a user clicks X.
+    $('#' + contentObj.removeId).click(removeItemClicked);
   });
 };
 
@@ -102,6 +110,7 @@ doctemplate.setUp = function(templateType) {
   contentObjs.forEach(function(contentObj) {
     contentObj.item = 'selectitem' + i;
     contentObj.responseId = 'response' + i;
+    contentObj.removeId = 'remove' + i;
     i++;
     var opKeys = ['response', 'responseImage'];
     opKeys.forEach(function(key) {
