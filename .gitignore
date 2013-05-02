@@ -1,5 +1,5 @@
 constants.py
-financier/src/ticker_symbols/*
+/financier/src/ticker_symbols/*
 financier/src/templates
 financier/src/simulator
 financier/src/analysis
