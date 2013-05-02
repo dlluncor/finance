@@ -1,4 +1,5 @@
 constants.py
+*
 /financier/src/ticker_symbols/*
 financier/src/templates
 financier/src/simulator
@@ -12,3 +13,4 @@ financier/src/proj/puzzles
 financier/src/proj/reading
 financier/src/proj/stats
 financier/src/proj/udacity
+!.gitignore
