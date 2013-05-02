@@ -162,7 +162,7 @@ DocTemplateCtrl.prototype.getBasicPageInfo = function(templateType) {
 
 DocTemplateCtrl.prototype.setButtonHandlers = function() {
   $('#templatePage-add-row').click(function(e) {
-    var newObj = { day: 'New day:', time: '8:02am', content: 'Recovery!!!  Report sheet', check: ''};
+    var newObj = { day: 'Day 1:', time: '8:00am', content: 'Description', check: ''};
     this.addContentObjects([newObj]);
   }.bind(this));
 };
