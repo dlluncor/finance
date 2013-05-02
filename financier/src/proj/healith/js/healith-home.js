@@ -26,9 +26,10 @@ DocTemplateCtrl = function() {
   this.contentObjs = []; // Rows loaded from the database or added by the user.
 };
 
-// Handles actions when a user clicks, hovers, or interacts with the rows.
+// Handles actions when a user clicks, hovers, or interacts with the rows that
+// these content objects represent.
 // NOTE: Ids are tied to - modifyContentForInteraction()
-DocTemplateCtrl.prototype.setItemSelectHandlers = function() {
+DocTemplateCtrl.prototype.setItemSelectHandlers = function(contentObjs) {
   var itemToContentObj = {};
   var responseIdToContentObj = {};
   var itemClicked = function(e) {
@@ -68,7 +69,7 @@ DocTemplateCtrl.prototype.setItemSelectHandlers = function() {
     myEl.parent().css('display', 'none');
   }
 
-  this.contentObjs.forEach(function(contentObj) {
+  contentObjs.forEach(function(contentObj) {
     // To send a message.
     $('#' + contentObj.item).click(itemClicked);
     itemToContentObj[contentObj.item] = contentObj;
@@ -81,9 +82,9 @@ DocTemplateCtrl.prototype.setItemSelectHandlers = function() {
 };
 
 // Sets up ids on the content objects for interaction.
-DocTemplateCtrl.prototype.modifyContentForInteraction = function() {
-  var i = 0;
-  this.contentObjs.forEach(function(contentObj) {
+DocTemplateCtrl.prototype.modifyContentForInteraction = function(contentObjs) {
+  var i = this.contentObjs.length;
+  contentObjs.forEach(function(contentObj) {
     contentObj.item = 'selectitem' + i;
     contentObj.responseId = 'response' + i;
     contentObj.removeId = 'remove' + i;
@@ -96,6 +97,22 @@ DocTemplateCtrl.prototype.modifyContentForInteraction = function() {
       }
     });
   });
+};
+
+// Method that needs to be called when a new list of rows with content objects are added.
+DocTemplateCtrl.prototype.addContentObjects = function(contentObjs) {
+  this.contentObjs = this.contentObjs.concat(contentObjs);
+  // Modify content to have interaction then fill in the table.
+  this.modifyContentForInteraction(contentObjs);
+
+  var templateRowsTmpl = $('#templateRow').template();
+  var table = $('#page2-template-table');
+  $.tmpl(templateRowsTmpl, contentObjs).appendTo(table);
+  // Set up the row select handlers.
+  // TODO(dlluncor): When content objects already exist, the X no longer works.
+  window.setTimeout(function() {
+    this.setItemSelectHandlers(contentObjs);
+  }.bind(this), 2);
 };
 
 // templateType - "heartSurgery" or "newTemplate"
@@ -143,6 +160,13 @@ DocTemplateCtrl.prototype.getBasicPageInfo = function(templateType) {
   return {};
 };
 
+DocTemplateCtrl.prototype.setButtonHandlers = function() {
+  $('#templatePage-add-row').click(function(e) {
+    var newObj = { day: 'New day:', time: '8:02am', content: 'Recovery!!!  Report sheet', check: ''};
+    this.addContentObjects([newObj]);
+  }.bind(this));
+};
+
 // params - {'templateType': 'heartTemplate'} for exapmle.
 DocTemplateCtrl.prototype.setUp = function(params) {
   var templateType = params['templateType'];
@@ -156,17 +180,12 @@ DocTemplateCtrl.prototype.setUp = function(params) {
   $.tmpl(templatePageTmpl, templatePageInfoObj).appendTo(page2Container);
 
   // Load the content objects which will represent the template rows.
-  this.contentObjs = this.loadContentObjects(templateType);
+  var contentObjs = this.loadContentObjects(templateType);
+  this.addContentObjects(contentObjs);
 
-  // Modify content to have interaction then fill in the table.
-  this.modifyContentForInteraction();
-  var templateRowsTmpl = $('#templateRow').template();
-  var table = $('#page2-template-table');
-  $.tmpl(templateRowsTmpl, this.contentObjs).appendTo(table);
-
-  // Set up the row select handlers.
+  // Add row needs this.
   window.setTimeout(function() {
-    this.setItemSelectHandlers();
+    this.setButtonHandlers();
   }.bind(this), 2);
 }
 

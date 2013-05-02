@@ -129,10 +129,12 @@ display: none;
   font-size: 200%;
 }
 
-.content-col {
-  border-right: 1px solid lightblue;
+.content-col-bottom {
   border-bottom: 1px solid lightblue;
-  border-top: 1px solid lightblue;
+}
+
+.content-col-right {
+  border-right: 1px solid lightblue;
 }
 
 #send-template-card {
