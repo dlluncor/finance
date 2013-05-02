@@ -1,15 +1,5 @@
 constants.py
 *
-financier/src/templates
-financier/src/simulator
-financier/src/analysis
-financier/src/proj/caller
-financier/src/proj/easydo
-financier/src/proj/education
-financier/src/proj/games
-financier/src/proj/health
-financier/src/proj/puzzles
-financier/src/proj/reading
-financier/src/proj/stats
-financier/src/proj/udacity
+!/financier/src/proj/*
+!/financier/src/proj/healith
 !.gitignore
