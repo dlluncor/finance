@@ -235,28 +235,38 @@ getParams = function() {
 };
 
 // Place controller.
-var hasher = {};
+var hasher = {
+  pages: ['page0', 'page1', 'page2', 'page3']
+};
+
+// Hides all pages except the page with this id.
+hasher.hidePagesExcept = function(thisPage) {
+  hasher.pages.forEach(function(pageId) {
+    if (pageId == thisPage) {
+      $('#' + pageId).css('display', 'block');
+    } else {
+      $('#' + pageId).css('display', 'none');
+    }
+  });
+};
 
 hasher.init_ = function() {
   var params = getParams();
   var switcher = '';
+
   if ('page0' in params || 'start' in params) {
-    $('#page0').css('display', 'block'); $('#page1').css('display', 'none'); 
-    $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
+    hasher.hidePagesExcept('page0');
     switcher = 'page0';
   } else if ('page1' in params) {
-    $('#page0').css('display', 'none'); $('#page1').css('display', 'block'); 
-    $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
+    hasher.hidePagesExcept('page1');
     switcher = 'page1';
   } else if ('page2' in params) {
-    $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
-    $('#page2').css('display', 'block'); $('#page3').css('display', 'none'); 
+    hasher.hidePagesExcept('page2');
     switcher = 'page2';
     var doctempCtrl = new DocTemplateCtrl();
     doctempCtrl.setUp(params);
   } else if ('page3' in params) {
-    $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
-    $('#page2').css('display', 'none'); $('#page3').css('display', 'block'); 
+    hasher.hidePagesExcept('page3');
     switcher = 'page3';
   }
   window.console.log(switcher);
