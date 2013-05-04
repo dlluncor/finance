@@ -33,7 +33,7 @@ class SendMessageTwilio(webapp.RequestHandler):
 def GetEndpoints():
   endpoints = [
     ('/healith', HealithDocMainPage),
-    ('/patientmobile', HealithPatientMobilePage),
+    ('/patient', HealithPatientMobilePage),
     ('/sendmessage', SendMessageTwilio)
   ]
   return endpoints
