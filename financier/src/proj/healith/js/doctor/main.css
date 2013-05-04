@@ -1,0 +1,173 @@
+.vid-angry {
+  -webkit-filter: saturate(350%);
+}
+
+.vid-entry {
+  -webkit-transition-duration: 4s;	
+  -webkit-transform: rotateY(180deg) !important;
+}
+
+.vid-sick {
+  -webkit-filter: hue-rotate(180deg);
+}
+
+/* Make transforms look cool. */
+video {
+   -webkit-transition-property: -webkit-transform;
+   width: 455px !important;
+   height: 340px !important;
+}
+
+.no-duration {
+   -webkit-transition-duration: 0s;
+}
+
+#myPublisherDiv {
+  display: inline-block;
+}
+
+#videoDiv {
+  display: inline-block;
+}
+
+.big-video {
+  width: 455px !important;
+  height: 340px !important;
+}
+
+.hide {
+	display: none;
+}
+
+#page0 {
+  display: block;
+}
+
+#page1 {
+display: none;
+}
+
+#page2 {
+display: none;
+}
+
+#page3 {
+display: none;
+}
+
+.med-textarea {
+	width: 505px;
+	height: 60px;
+}
+
+.left-align {
+	margin-left: 10px;
+}
+
+.more-left-align {
+	margin-left: 20px;
+}
+
+/* CSS specifically for healith. */
+
+/* Page 0. */
+.big-letters {
+  color: Navy;
+  font-size: 160%;
+}
+
+#page0 td {
+  padding: 100px;
+}
+
+#page0 .patient-notification {
+  background-color: cyan;
+  font-weight: bold;
+  padding: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+}
+
+.plus-icon {
+  color: red;
+  font-weight: bold;
+  font-size: 500%;
+  cursor: pointer;
+}
+
+/* Page 1. */
+#page1-table img {
+  height: 200px;
+  width: 200px;
+}
+
+.tile {
+  display-inline: block;
+  border: 3px solid lightblue;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Page 2. */
+.x-icon:after {
+  content: "x";
+  color: red;
+  font-weight: bold;
+  font-size: 140%%;
+  cursor: pointer;
+}
+
+#page2-template-table {
+  text-align: center !important;
+}
+
+.green-check:after {
+  content: "✓";
+  font-weight: bold;
+  color: lawngreen;
+  font-size: 200%;
+}
+
+.content-col-bottom {
+  border-bottom: 1px solid lightblue;
+}
+
+.content-col-right {
+  border-right: 1px solid lightblue;
+}
+
+#send-template-card {
+  border: 3px solid lightblue;
+  padding: 10px;
+  margin-left: 100px;
+  vertical-align: top;
+}
+
+.blue-plus:after {
+  color: blue;
+  font-weight: bold;
+  font-size: 200%;
+  cursor: pointer;
+  content: "+";
+}
+
+.right-arrow:after {
+  color: orange;
+  font-weight: bold;
+  font-size: 180%;
+  cursor: pointer;
+  content: "→";
+}
+
+.maybe-nice-background {
+  background-color: #f2f2f2!important;
+  border-top: 1px solid #e2e2e2;
+}
+
+.response-image {
+  position: absolute;
+  left: 100;
+  top: -30;
+  width: 300px;
+}
