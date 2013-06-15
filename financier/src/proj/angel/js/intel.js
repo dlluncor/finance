@@ -1,8 +1,9 @@
-
 // Learn angular js.
 // Stripe - payments
 
-var ctrl = {};
+var ctrl = {
+	uProfile: null // user profile from Intel.
+};
 
 // Ask the user to login.
 ctrl.login = function() {
@@ -24,10 +25,15 @@ ctrl.login = function() {
   }, successCallback, errorCallback);
 };
 
+ctrl.updateUserProfile = function() {
+
+};
+
 ctrl.getUserProfile = function() {
-  var uProfile;
   var successGetProfile = function(profile) {
   	window.console.log(profile);
+  	ctrl.uProfile = profile;
+  	ctrl.updateUserProfile();
   };
   var errorCallback = function(data) {
     window.console.log('Get user profile failed.');
@@ -47,3 +53,8 @@ ctrl.init_ = function() {
  */
 
 $(document).ready(ctrl.init_);
+
+
+// btoa (text to base64 binary encoded)
+// atob (base64 binary to text)
+// firefeed.io (Twitter just in JS)
