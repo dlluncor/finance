@@ -35,6 +35,9 @@ handlers:
 - url: /proj/healith/js
   static_dir: proj/healith/js
 
+- url: /proj/angel/js
+  static_dir: proj/angel/js
+
 - url: /css
   static_dir: css
 
