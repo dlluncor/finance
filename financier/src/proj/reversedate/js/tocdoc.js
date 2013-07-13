@@ -84,6 +84,7 @@ todoc.reverseDateInit = function() {
     window.location.hash = '#page2'; 
  });
 
+ $('#peoplesImg').css('width', windowWidth + 100 + 'px');
  $('#peoplesImg').click(function() {
     window.location.hash = '#page3'; 
  });
