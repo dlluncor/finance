@@ -75,9 +75,11 @@ todoc.init_ = function() {
 
 todoc.reverseDateInit = function() {
  $('#signIn').click(function() {
-    window.location.hash = '#page1'; 
+    window.location.hash = '#page1';
  });
 
+ var windowWidth = $(window).width();
+ $('#interestsImg').css('width', windowWidth + 'px');
  $('#interestsImg').click(function() {
     window.location.hash = '#page2'; 
  });
