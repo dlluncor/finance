@@ -32,6 +32,9 @@ handlers:
 - url: /proj/puzzles/js
   static_dir: proj/puzzles/js
 
+- url: /proj/reversedate/js
+  static_dir: proj/reversedate/js
+
 - url: /proj/healith/js
   static_dir: proj/healith/js
 

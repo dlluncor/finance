@@ -56,7 +56,7 @@ todoc.init_ = function() {
   window.location.hash = '#start';
   avs.init();
 
-  todoc.apiKey = '100';
+  todoc.apiKey = '25443712';
   todoc.sessionId = todoc.getSessionId();
   todoc.token = todoc.getToken(); // user id.
 
@@ -73,12 +73,12 @@ todoc.init_ = function() {
 
 // Get the session for each user.
 todoc.getSessionId = function() {
-  return "2_MX4xMDB-flNhdCBBcHIgMDYgMTg6MDc6MDAgUERUIDIwMTN-MC40MzQ0MTEwNX4";
+  return OUR_SESSION_ID;
 };
 
 // Get the token for each user.
 todoc.getToken = function() {
-  var token0 = 'T1==cGFydG5lcl9pZD0xMDAmc2lnPTViZmIyYzJkOWY3Mjc0MDIyNmE1YWQ3MzA2Yzc4MDBmNjI2NzA1ODQ6cm9sZT1wdWJsaXNoZXImc2Vzc2lvbl9pZD0yX01YNHhNREItZmxOaGRDQkJjSElnTURZZ01UZzZNRGM2TURBZ1VFUlVJREl3TVROLU1DNDBNelEwTVRFd05YNCZjcmVhdGVfdGltZT0xMzY1Mjk2ODI4Jm5vbmNlPTAuMTQ1NDE1MjY2MTc4NjgwNCZleHBpcmVfdGltZT0xMzY3ODgyNTE1';
+  var token0 = OUR_TOKEN;
   return token0;
 };
 
