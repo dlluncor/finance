@@ -22,6 +22,7 @@ from proj.stats import index as stats_index
 from proj.puzzles import index as puzzles_index
 from proj.healith import index as healith_index
 from proj.angel import index as angel_index
+from proj.reversedate import index as reversedate_index
 
 from simulator import assets
 from analysis import question1
@@ -99,9 +100,11 @@ def main():
   puzzles_endpoints = puzzles_index.GetEndpoints()
   healith_endpoints = healith_index.GetEndpoints()
   angel_endpoints = angel_index.GetEndpoints()
+  reversedate_endpoints = reversedate_index.GetEndpoints()
   endpoints = (finance_endpoints + health_endpoints + education_endpoints +
       reading_endpoints + games_endpoints + easydo_endpoints + stats_endpoints +
-      puzzles_endpoints + healith_endpoints + angel_endpoints)
+      puzzles_endpoints + healith_endpoints + angel_endpoints +
+      reversedate_endpoints)
   application = webapp.WSGIApplication(endpoints, debug=True)
   run_wsgi_app(application)
 

@@ -16,12 +16,20 @@ import json
 class AngelGamePage(webapp.RequestHandler):
   def get(self):
     values = {}
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'angel.html')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+    self.response.out.write(template.render(path, values))
+
+## HTML pages.
+class AngelVidPage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'angelvid.html')
     self.response.out.write(template.render(path, values))
 
 def GetEndpoints():
   endpoints = [
     ('/angel', AngelGamePage),
+    ('/angelvid', AngelVidPage)
   ]
   return endpoints
 

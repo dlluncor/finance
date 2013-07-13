@@ -88,80 +88,22 @@ ctrl.getAppProfile = function() {
   intel.profile.getApplicationProfile(getProfile, errorCallback);
 };
 
-// Showing the map.
-
-ctrl.showMap = function() {
-  var onLogin = function() {
-    window.console.log('On login being called.');
-  };
-
-  var map;
-  var prefs = {
-    mapTypeId: intel.maps.MapTypeId.ROADMAP,
-    zoom: 13,
-    center: new intel.maps.LatLng(45.52345, -122.676),
-    login: {
-      contextUrl: 'https://api.intel.com/location/',
-      clientId: C.clientId,
-      accessToken: C.token,
-      clientSecret: C.secretId,
-      callback: onLogin
-    }
-  };
-  ctrl.map = new intel.maps.Map(
-      document.getElementById('booty_map'), prefs);
-  ctrl.poiSearch();
-};
-
-function search_results(response, status) {
-            document.getElementById("hiddenpane").style.display="none";
-            if(!(response === undefined)){
-               if (status == intel.maps.GeocoderStatus.OK) {
-                  if(response.results.length == 0)
-                     alert("Geocoder returned no matches: ZERO_RESULTS");
-                  else{ 
-                     var c = response.results[0];
-                     point = new intel.maps.LatLng(c.geoPoint.y, c.geoPoint.x);
-                     var bounds = new intel.maps.LatLngBounds(point,point);
-                     for (var i = 0; i < response.results.length; ++i) {
-                        var r = response.results[i];
-                        var point = null; 
-                        var title = null;
-                        point = new intel.maps.LatLng(r.geoPoint.y, r.geoPoint.x);
-                            if(r.description !== undefined) 
-                           title = r.description;
-                        else
-                           title = r.name+(r.street == null ? "" : ", "+r.street )+(r.city == null ? "" : ", "+r.city)+(r.state == null ? "" : ", "+r.state)+(r.countryCode == null ? "" : ", "+r.countryCode);
-                        new intel.maps.Marker({position:point, title:title, map:map});
-                        bounds.extend(point);
-                     }
-                     map.fitBounds(bounds);
-                     if (response.results.length == 1)
-                        map.setZoom(15);      
-                  }
-               } else alert("Geocoder returned no matches: " + response);
-            }
-         }
-         
-ctrl.poiSearch = function() {
-  var coder = new intel.maps.Geocoder();
-  coder.poi({
-    'name': 'club',
-    'categoryId': 'nightlife',
-    'bounds': ctrl.map.getBounds()
-  }, search_results);
-  setTimeout(search_results, 5000);
-};
-
 // What gets called now the user is logged in.
 ctrl.nowLoggedIn = function() {
-  ctrl.getUserProfile();
+  //ctrl.getUserProfile();
   //ctrl.getAppProfile();
-  ctrl.showMap();
+  cmaps.showMap(37.7750, -122.4183);
 };
 
 ctrl.init_ = function() {
-  window.console.log('yo man');
+  // Button handlers.
+  $('#booty_address').keypress(function(e) {
+    if (e.which == 13) {
+        cmaps.geocode();
+    }
+  });
+
+  window.console.log('yo man in my own window');
   ctrl.login();
 };
 
