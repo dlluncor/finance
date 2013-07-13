@@ -68,6 +68,23 @@ todoc.init_ = function() {
   todoc.session.connect(todoc.apiKey, todoc.token);
   todoc.session.addEventListener("sessionConnected", sessionConnectedHandler);
   todoc.session.addEventListener("streamCreated", streamCreatedHandler);
+
+  // Handlers for our reverse date application.
+  todoc.reverseDateInit();
+};
+
+todoc.reverseDateInit = function() {
+ $('#signIn').click(function() {
+    window.location.hash = '#page1'; 
+ });
+
+ $('#interestsImg').click(function() {
+    window.location.hash = '#page2'; 
+ });
+
+ $('#peoplesImg').click(function() {
+    window.location.hash = '#page3'; 
+ });
 };
 
 
@@ -267,10 +284,9 @@ hasher.init_ = function() {
     $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
     switcher = 'page0';
   } else if ('page1' in params) {
-    $('#page0').css('display', 'none'); 
+    $('#page0').css('display', 'none'); $('#page1').css('display', 'block');
     $('#page2').css('display', 'none'); $('#page3').css('display', 'none'); 
     switcher = 'page1';
-    todoc2.getImages();
   } else if ('page2' in params) {
     $('#page0').css('display', 'none'); $('#page1').css('display', 'none'); 
     $('#page2').css('display', 'block'); $('#page3').css('display', 'none'); 
