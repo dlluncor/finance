@@ -41,6 +41,9 @@ handlers:
 - url: /proj/angel/js
   static_dir: proj/angel/js
 
+- url: /proj/reading/js
+  static_dir: proj/reading/js
+
 - url: /css
   static_dir: css
 
