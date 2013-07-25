@@ -236,11 +236,10 @@ TimeQ.prototype.nextQuiz = function() {
 BookQ = function(textView, answerView) {
   this.textView = textView;
   this.answerView = answerView;
-  // Initiate the first 10 books.
-  this.initiate();
 
   // books: Object from isbndb database.
   // bookInd: which book we are on, max we can have is 10.
+  // topic: what type of books to be quizzed on.
   this.state = {
     books: null,
     bookInd: 1
@@ -248,13 +247,13 @@ BookQ = function(textView, answerView) {
 };
 
 // Get the first couple of books.
-BookQ.prototype.initiate = function() {
+BookQ.prototype.initiate = function(topic) {
   callback = function(data) {
     window.console.log('Success pull titles.');
     window.console.log(data);
     this.state['books'] = data;
   }.bind(this);
-  FetchJSON('http://isbndb.com/api/v2/json/I751R8PX/books?q=politics', callback);
+  FetchJSON('http://isbndb.com/api/v2/json/I751R8PX/books?q=' + topic, callback);
 };
 
 
@@ -286,7 +285,7 @@ BookQ.prototype.gradeQuiz = function() {
   }
 
   
-  var tryAgainBtn = $('<button>Try again</button>');
+  var tryAgainBtn = $('<button>Next one!</button>');
   tryAgainBtn.click(function() {
     this.nextQuiz();
   }.bind(this));
@@ -331,13 +330,27 @@ BookQ.prototype.nextQuiz = function() {
   this.textView.empty();
   this.answerView.empty();
 
+  // Choose a topic if one is not chosen.
+  if (!this.state['topic']) {
+    this.textView.append('<span>Choose a topic: </span><input id="topicBooks"></input>');
+    var btn = $('<div><button>Submit</button></div>');
+    btn.click(function() {
+      this.state['topic'] = $('#topicBooks').val();
+      this.nextQuiz();
+    }.bind(this));
+    this.textView.append(btn);
+    return;
+  }
+
   if (!this.state['books']) {
+    // Request some topics and then wait for the 10 books to return.
+    this.initiate(this.state['topic']);
     window.setTimeout(function() {
       this.nextQuiz(); // Wait a second to get the JSON info if we don't have it yet.
     }.bind(this), 200);
     return;
   }
-
+  // Finally we have books and a topic.
   this.state['bookInd'] = this.state['bookInd'] + 1;
 
   // Show book and title. 
