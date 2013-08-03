@@ -39,19 +39,19 @@ Snippets.prototype.nextRandom = function() {
 };
 
 var Ctrl = function(){
-	this.snippets = new Snippets();
-	this.textView = $('#mainText');
-	// Make into one object.
-	this.curText = ''; // Current text being quizzed.
-	this.curQuizInd = 0; // Which quiz are we on.
-	// How to configure the quiz.
-	this.config = {
-	  regexVal: 0
-	};
-	this.answerView = $('#answerText');
+  this.snippets = new Snippets();
+  this.textView = $('#mainText');
+  // Make into one object.
+  this.curText = ''; // Current text being quizzed.
+  this.curQuizInd = 0; // Which quiz are we on.
+  // How to configure the quiz.
+  this.config = {
+    regexVal: 0
+  };
+  this.answerView = $('#answerText');
 
-	// Time me quizzes.
-	this.timeQ = new TimeQ(this.textView, this.answerView);
+  // Time me quizzes.
+  this.timeQ = new TimeQ(this.textView, this.answerView);
   // Name the book title quizzes.
   this.bookQ = new BookQ(this.textView, this.answerView);
 };
@@ -169,24 +169,33 @@ Ctrl.prototype.showQuizText = function() {
   this.textView.append(submitBtn);
   var nextBtn = $('<button>Next</button>');
   nextBtn.click(function(e) {
-    this.nextQuiz();
+    this.curQuizInd += 1;
+    this.fillInTheBlankQuiz('phone');
   }.bind(this));
   this.textView.append(nextBtn);
 };
 
 // Have to fill in the blank, either from text or for phone numbers.
-Ctrl.prototype.fillInTheBlankQuiz = function() {
-  // This is for filling in the blanks.
-  this.config.regexVal = 0; this.curQuizInd % 3;
-  if (this.curQuizInd % 3 == 0) {
-    this.curText = this.snippets.nextRandom();
+Ctrl.prototype.fillInTheBlankQuiz = function(whichType) {
+  // This is for filling in the blanks for phone numbers.
+
+  // Figure out which text to produce and blank out.
+  if (whichType == 'phone') {
+    this.config.regexVal = 0;
+    if (this.curQuizInd % 3 == 0) {
+      this.curText = this.snippets.nextRandom();
+    }
+  } else if (whichType == 'textPassage') {
+    this.config.regexVal = this.curQuizInd % 3;
+    this.curText = this.snippets.next();
   }
 
   var answerSec = 10;
   this.textView.empty();
   this.textView.append('<h3>Read for ' + answerSec + ' seconds!</h3>');
   this.textView.append('<div>' + this.curText + '</div>');
-  window.setTimeout(this.showQuizText.bind(this), answerSec * 1000);
+  var handle = window.setTimeout(this.showQuizText.bind(this), answerSec * 1000);
+  GLOB.intervals.push(handle);
   // Increment which quiz we have.
   this.curQuizInd += 1;
 };
@@ -229,6 +238,7 @@ TimeQ.prototype.nextQuiz = function() {
     	startCountdown();
     }
   }, 1000);
+  GLOB.intervals.push(cancelMe);
 
   this.textView.append(btn);
 };
@@ -345,9 +355,10 @@ BookQ.prototype.nextQuiz = function() {
   if (!this.state['books']) {
     // Request some topics and then wait for the 10 books to return.
     this.initiate(this.state['topic']);
-    window.setTimeout(function() {
+    var handle = window.setTimeout(function() {
       this.nextQuiz(); // Wait a second to get the JSON info if we don't have it yet.
     }.bind(this), 200);
+    GLOB.intervals.push(handle);
     return;
   }
   // Finally we have books and a topic.
@@ -359,33 +370,93 @@ BookQ.prototype.nextQuiz = function() {
   var coverImgUrl = 'http://covers.openlibrary.org/b/isbn/' + bookObj.isbn13 + '-L.jpg';
   this.textView.append('<img src="' + coverImgUrl + '"></url>');
 
-  window.setTimeout(function() {
+  var handle = window.setTimeout(function() {
     this.askQuestion();
   }.bind(this), 5000);
+  GLOB.intervals.push(handle);
 };
 
 BookQ.prototype.getBookObj = function() {
   return this.state['books'].data[this.state['bookInd']];
 };
 
-// Sets up an entirely new quiz.
-Ctrl.prototype.nextQuiz = function() {
-  this.textView.empty();
-  this.answerView.empty();
-  
-  // Configure what to show.
-  //this.fillInTheBlankQuiz();
-  //this.timeQ.nextQuiz();
-  this.bookQ.nextQuiz();
+
+MainCtrl = function() {
+  this.ctrl = new Ctrl();
+  this.namesCtrl = new NamesCtrl($('#mainText'));
+  this.gridCtrl = new GridCtrl($('#mainText'));
+  this.options = {
+    'fitb': 'Fill In the Blank',
+    'phone': 'Fill In Phone #',
+    'timer': 'Count time',
+    'book': 'Book titles',
+    'names': 'New names',
+    'numbergrid': 'Number grid'
+  };
 };
 
-Ctrl.prototype.init_ = function() {
-  this.nextQuiz();
+// Sets up an entirely new quiz.
+MainCtrl.prototype.nextQuiz = function(quizType) {
+  this.ctrl.textView.empty();
+  this.ctrl.answerView.empty();
+  
+  // Configure what to show.
+  if (quizType == 'book') {
+    this.ctrl.bookQ.nextQuiz();
+  } else if (quizType == 'timer') {
+    this.ctrl.timeQ.nextQuiz();
+  } else if (quizType == 'fitb') {
+    this.ctrl.fillInTheBlankQuiz('textPassage');
+  } else if (quizType == 'phone') {
+    this.ctrl.fillInTheBlankQuiz('phone');
+  } else if (quizType == 'names') {
+    this.namesCtrl.launch();
+  } else if (quizType == 'numbergrid') {
+    this.gridCtrl.launch();
+  }
+};
+
+MainCtrl.prototype.init_ = function() {
+  // Setup quiz options.
+  var select = $('#quizOptions');
+  var addOption = function(internal, display) {
+    var option = $('<option>' + display + '</option>');
+    option.val(internal);
+    select.append(option);
+  };
+
+  for (var option in this.options) {
+    addOption(option, this.options[option]);
+  }
+
+  select.change(function() {
+    // Clear all previous intervals before showing a selection.
+    GLOB.intervals.forEach(function(intervalHandle) {
+      window.clearInterval(intervalHandle);
+    });
+    GLOB.intervals = [];
+    this.nextQuiz(select.val());
+  }.bind(this));
+};
+
+MainCtrl.prototype.fbInit_ = function() {
+  this.namesCtrl.fbInit();
+};
+
+// Keeps track of all intervals.
+var GLOB = {
+  intervals: [],
+  c: null
 };
 
 function docInit_() {
-  var c = new Ctrl();
-  c.init_();
+  GLOB.c = new MainCtrl();
+  GLOB.c.init_();
 }
 
+function fbInit_() {
+  GLOB.c.fbInit_();
+}
+
+// This gets called from FB init.
 $(document).ready(docInit_);

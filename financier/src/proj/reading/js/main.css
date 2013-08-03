@@ -1,0 +1,14 @@
+.grid-number-q {
+	background-color: whiteSmoke;
+	padding: 20px;
+	font-size: 130%;
+	width: 70px;
+}
+
+.grid-blend-font {
+	color: whiteSmoke;
+}
+
+.winner {
+	color: green;
+}
