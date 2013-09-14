@@ -280,4 +280,11 @@ tri.init = function() {
   tri.draw();
 };
 
+//create map
+var map = new esri.Map("mapDiv",{
+  basemap: "hybrid",
+  center: [-6.25, 53.35],
+  zoom: 12
+});
+
 $(document).ready(tri.init);
