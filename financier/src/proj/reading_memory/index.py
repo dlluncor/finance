@@ -1,5 +1,5 @@
 """
-End points for speed reading applications.
+End points for speed reading applications and memory games.
 """
 
 # Self defined modules.
