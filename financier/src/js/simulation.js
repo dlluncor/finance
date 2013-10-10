@@ -1,6 +1,7 @@
 var sim = {};
 
 sim.renderResults_ = function(response) {
+  mixpanel.track("Simulation results returned.");
   window.console.log(response);
   var resultArea = $('#SimulationResults');
   // Clear previous results.
