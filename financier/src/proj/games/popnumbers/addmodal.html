@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+	<title>Submit Dialog</title> 
+	<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />  
+	<!-- <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/> -->
+        <style>
+body { background: #dddddd;}
+
+.ui-mobile #jqm-home {  background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
+.ui-mobile #jqm-homeheader { padding: 55px 25px 0; text-align: center }
+.ui-mobile #jqm-homeheader h1 { margin: 0 0 10px; }
+.ui-mobile #jqm-homeheader p { margin: 0; }
+.ui-mobile #jqm-version { text-indent: -99999px; background: url(../images/version.png) top right no-repeat; width: 119px; height: 122px; overflow: hidden; position: absolute; top: 0; right: 0; }
+.ui-mobile .jqm-themeswitcher { clear: both; margin: 20px 0 0; }
+
+h2 { margin-top:1.5em; }
+p code { font-size:1.2em; font-weight:bold; } 
+
+dt { font-weight: bold; margin: 2em 0 .5em; }
+dt code, dd code { font-size:1.3em; line-height:150%; }
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+.ui-header .jqm-home { top:0.65em; }
+        </style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+</head> 
+<body> 
+  <div data-role="page">
+	<div data-role="header" data-theme="d" data-position="inline">
+		<h1>Dialog</h1>
+	</div>
+
+	<div data-role="content" data-theme="c">
+		<h1>Add a new game!</h1>
+                       <label for="nameOfGame">Name:</label>
+                       <input type="text" name="nameOfGameVal" id="nameOfGame" value=""
+                          placeholder="Example: Cows go kabloom"> 
+                       <label for="pathToGame">Link:</label>
+                       <input type="text" name="pathGameVal" id="pathToGame" value=""
+                          placeholder="Example: www.mygames.com/cows.html">
+                       <a href="/gameportal#meee" data-role="button" data-rel="back" data-theme="b"
+                         id="submitDialog">Submit</a>       
+		<a href="/gameportal" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+	</div>
+        <!-- JS must be INSIDE the data-role page div, gawd. -->
+        <script type="text/javascript">
+          $('#submitDialog').click(function() {
+            var pathToGame = $('#pathToGame').val();
+            var nameOfGame = $('#nameOfGame').val();
+            // Store the most recent name of game into local storage.
+            localStorage.setItem('pathToGame', pathToGame);
+            localStorage.setItem('nameOfGame', nameOfGame); 
+          });
+          window.console.log('waaah');
+        </script>
+  </div>
+</body>
+</html>

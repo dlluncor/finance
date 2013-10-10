@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script type="text/javascript" src="/proj/puzzles/js/work1.js"></script>
+    <script type="javascript/worker" id="woah">
+      self.addEventListener('message', function(e) {
+        var data = e.data;
+        if (data.url) {
+          var url = data.url;
+          var index = url.indexOf('worker.html');
+          if (index != -1) {
+            url = url.substring(0, index);
+          }
+        }
+        importScripts(url + 'work1.js');
+        var hey = work1.work();
+        var timeToWork = new Date() - data.startTime;
+        
+        msg = {};
+        msg.input = data;
+        msg.message = 'Took: ' + hey + ' From start: ' + timeToWork;
+        self.postMessage(msg);
+      }, false);
+    </script>
+    
+    <script type="text/javascript" src="/proj/puzzles/js/main.js"></script>
+  </head>
+  <body>
+    <div id="body">
+      <div id="messages"></div>
+    </div>
+  </body>
+  <script>
+    window.URL = window.URL || window.webkitURL;
+
+    worker.main();
+  </script>
+</html>
