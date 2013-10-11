@@ -1,6 +1,9 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/main.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+  <script src="js/main.js"></script>
+
     <script src="js/mixpanel.js" type="text/javascript"></script>
     <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.autocomplete.js" type="text/javascript"></script>
@@ -10,33 +13,8 @@
     <script src="js/stockhistory.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="sandbar">
-      <ol>
-        <li><a href="/education">Education</a></li>
-        <li class="current"><a href="/">Finance</a></li>
-        <li><a href="/health">Health</a></li>
-        <li><a href="/easydo_preferences">Flights</a></li>
-        <li><a href="/gameportal">Games</a></li>
-        <li><a href="/speedreading">Reading</a></li>
-        <li><a href="/stats">Stats</a></li>
-        <li><a href="/imageizer">VidChat!</a></li>
-        <li><a href="/puzzles">Puzzles</a></li>
-        <!-- <li><a href="#" id="moreLink">More</a> -->
-      </ol>
-      <ol class="hackypopout" id="moreFlyout" style="display:none;">
-        <li style="padding-left:0px;">
-          <a href="speed_reading">Reading</a>
-        </li>
-      </ol>
-      <script>
-        var moreLink = $('#moreLink');
-        moreLink.click(function(e) {
-          var flyout = $('#moreFlyout');
-          var display = flyout.css('display');
-          var newDisplay = display == 'none' ? 'block' : 'none';
-          flyout.css('display', newDisplay);  
-        });
-      </script>
+    <div ng-app="myApp0">
+      <myheader></myheader>
     </div>
     <ul class='tabs'>
       <li><a href='#SimulationTab'>Simulation</a></li>

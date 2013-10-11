@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/main.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="proj/reading/js/memory_angular.js"></script>
+  <style>
+    .done-true {
+    	text-decoration: line-through;
+    	color: grey;
+    }
+  </style>
+</head>
+<body>
+<div ng-app="myApp0">
+<myheader>
+</myheader>
+  <div>
+    <label>Name:</label>
+    <input type="text" ng-model="name" placeholder="Enter a name here" value="me">
+    <hr>
+    <h4>Hello {{name}}!</h4>
+  </div>
+  <div>
+	  <div ng-controller="TodoCtrl">
+	  	<h2>TODOs</h2>
+	  	<span>{{remaining()}}</span> of {{todos.length}}</span>
+	  	<div ng-repeat="todo in todos">
+	      <input type="checkbox" ng-model="todo.completed"> 
+	      <span class="done-{{todo.completed}}">{{todo.name}}</span>
+	    </div>
+	    <form ng-submit="addTodo()">
+	      <input type="input" placeholder="TODO description." ng-model="todoText"></input>
+	      <input type="Submit" value="Add">
+	    </form>
+	  </div>
+   </div>
+</div>
+</body>
+</html>

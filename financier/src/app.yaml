@@ -42,7 +42,7 @@ handlers:
   static_dir: proj/angel/js
 
 - url: /proj/reading/js
-  static_dir: proj/reading/js
+  static_dir: proj/reading_memory/js
 
 - url: /css
   static_dir: css
@@ -56,6 +56,9 @@ handlers:
 
 - url: /assets/js
   static_dir: assets/js
+
+- url: /assets/html
+  static_dir: assets/html
 
 - url: /.*
   script: index.py

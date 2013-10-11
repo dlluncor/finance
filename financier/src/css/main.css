@@ -5,6 +5,7 @@
 
 .sandbar ol {
   -webkit-padding-start: 0px;
+  -webkit-margin-after: 0px;
 }
 
 .sandbar li {
@@ -24,12 +25,13 @@
 }
 
 .sandbar .hackypopout {
-  padding-left: 0px;
-  padding-top: 4px;
   position: absolute;
   background-color: black;
-  top: 12;
-  left: 260;
+  left: 680px;
+}
+
+.sandbar .hackypopout li {
+  padding: 0;
 }
 
 #SimulationTab {

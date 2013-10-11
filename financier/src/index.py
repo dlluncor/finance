@@ -15,7 +15,7 @@ from django.utils import simplejson
 # Import modules I don't want to create another application for.
 from proj.health import index as health_index
 from proj.education import index as education_index
-from proj.reading import index as reading_index
+from proj.reading_memory import index as reading_index
 from proj.games import index as games_index
 from proj.easydo import index as easydo_index
 from proj.stats import index as stats_index

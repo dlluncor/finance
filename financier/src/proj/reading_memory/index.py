@@ -26,6 +26,11 @@ class MemoryReadPage(webapp.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), 'templates', 'memory_read.html')
     self.response.out.write(template.render(path, values))
 
+class MemoryAngularPage(webapp.RequestHandler):
+  def get(self):
+    values = {}
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'memory_angular.html')
+    self.response.out.write(open(path,'r').read())
 
 class Contacter(object):
 
@@ -66,6 +71,7 @@ def GetEndpoints():
   endpoints = [
     ('/speedreading', ReadingMainPage),
     ('/memoryread', MemoryReadPage),
+    ('/memoryangular', MemoryAngularPage),
     ('/getjson', JSONApiEndpoint),
   ]
   return endpoints
