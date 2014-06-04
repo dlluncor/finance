@@ -279,7 +279,19 @@ speedRead = function(){
 	}
 }
 
+// Response from YQL server about the diffbot response. Has funky rendering so we need to parse out the title
+// and content.
+Parser = function(p) {
+  this.p = p;
+};
 
+Parser.prototype.content = function() {
+  return this.p.substring(this.p.indexOf('"text"') + 8, this.p.indexOf('"html"') - 2)
+};
+
+Parser.prototype.title = function() {
+  return this.p.substring(this.p.indexOf('"title"') + 9, this.p.indexOf('"text"') - 2)
+};
 
 //TODO: save what topics the user has read about
 
@@ -317,12 +329,14 @@ ContentParser.prototype.getArticleContent = function(){
 			var yql_obj = new Y.yql(yql_query);
 			yql_obj.on('query', function(response) {
 				if (response.results){
-				console.log('Results p: ' + response.results.body.p);
-				//Watch out, might want to sanitize results even though its from API
-				paragraph_obj = eval('('+ response.results.body.p + ')');
+                                var p = response.results.body.p;
+                                var pars = new Parser(p);
+                                var title = pars.title();  // TODO: Display title in another element.
+                                var content = pars.content(); 
+				console.log('Results p: ' + p);
 
 				//text, author, title, icon, media 
-				document.getElementById('textEntry').value = paragraph_obj.text;
+				document.getElementById('textEntry').value = content;
 
 				//now call the parser to start speed reading and do its magic
 				reader.speedReadWordsInBox();
