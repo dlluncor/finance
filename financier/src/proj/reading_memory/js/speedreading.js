@@ -336,6 +336,7 @@ ContentParser.prototype.getArticleContent = function(){
 				console.log('Results p: ' + p);
 
 				//text, author, title, icon, media 
+				document.getElementById('articleTitle').innerHTML = title;
 				document.getElementById('textEntry').value = content;
 
 				//now call the parser to start speed reading and do its magic
